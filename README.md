@@ -20,4 +20,4 @@ Marketing and studio website for [Oriental Labs](https://orientalabs.dev) — a 
 
 ---
 
-Oriental Labs © 2025 — Private
+Oriental Labs © 2026 — Private
