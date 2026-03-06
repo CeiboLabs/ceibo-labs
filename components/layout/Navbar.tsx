@@ -22,14 +22,14 @@ export function Navbar() {
   const activeSection = useActiveSection(SECTION_IDS);
   const pathname = usePathname();
   const isHomepage = pathname === '/';
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   const NAV_LINKS = [
     { label: t.nav.services, href: '#services', hash: true },
     { label: t.nav.projects, href: '#projects', hash: true },
     { label: t.nav.about, href: '#about', hash: true },
     { label: t.nav.contact, href: '#contact', hash: true },
-    { label: t.nav.blog, href: '/blog', hash: false },
+    { label: t.nav.blog, href: `/${locale}/blog`, hash: false },
   ];
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export function Navbar() {
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
         >
           <Link
-            href={isHomepage ? '/' : '/'}
+            href={`/${locale}`}
             onClick={(e) => {
               if (isHomepage) { e.preventDefault(); handleNavClick('#hero'); }
             }}
@@ -87,7 +87,7 @@ export function Navbar() {
                 <li key={href}>
                   {hash ? (
                     <a
-                      href={isHomepage ? href : `/${href}`}
+                      href={isHomepage ? href : `/${locale}/${href}`}
                       onClick={(e) => {
                         if (isHomepage) { e.preventDefault(); handleNavClick(href); }
                       }}
