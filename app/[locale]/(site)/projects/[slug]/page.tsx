@@ -36,7 +36,7 @@ export async function generateMetadata({
 
   const title = pickI18n(project.title_i18n, locale as Locale) || project.title || project.slug;
   const description = pickI18n(project.short_description_i18n, locale as Locale) || project.short_description || '';
-  const ogUrl = `/api/og?type=project&title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent('Oriental Labs')}&locale=${locale}`;
+  const ogUrl = `${SITE.url}/api/og?type=project&title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent('Oriental Labs')}`;
 
   return {
     title,

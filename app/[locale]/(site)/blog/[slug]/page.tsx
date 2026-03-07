@@ -58,7 +58,9 @@ export async function generateMetadata({
 
   const title = pickI18n(post.title_i18n, locale as Locale);
   const excerpt = pickI18n(post.excerpt_i18n, locale as Locale);
-  const ogUrl = `/api/og?type=blog&title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(excerpt)}&locale=${locale}`;
+  const ogImage = post.cover_image_url
+    ? post.cover_image_url
+    : `${SITE.url}/api/og?type=blog&title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(excerpt)}`;
 
   return {
     title,
@@ -72,7 +74,7 @@ export async function generateMetadata({
       description: excerpt || undefined,
       type: 'article',
       publishedTime: post.published_at ?? undefined,
-      images: [{ url: ogUrl, width: 1200, height: 630, alt: title }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
   };
 }
