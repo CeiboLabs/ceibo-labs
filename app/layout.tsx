@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [
       {
-        url: '/api/og',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: `${SITE.name} — ${SITE.tagline}`,
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: `${SITE.name} — ${SITE.tagline}`,
     description: SITE.description,
     creator: SITE.twitterHandle,
-    images: ['/api/og'],
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
