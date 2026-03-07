@@ -25,6 +25,6 @@ export const SITE = {
   description:
     'Oriental Labs is a Uruguayan software & AI studio. We build web apps, AI integrations, design systems, and MVPs for startups and businesses worldwide.',
   url: 'https://orientalabs.dev',
-  ogImage: '/og-image.png',
+  ogImage: '/og-image.jpg',
   twitterHandle: '@orientallabs',
 } as const;
