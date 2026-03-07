@@ -8,8 +8,8 @@ export const CONTACT = {
   whatsappDisplay: '+598 99 000 000',
 
   // Instagram
-  instagramHandle: 'orientallabs',
-  instagramUrl: 'https://instagram.com/orientallabs',
+  instagramHandle: 'orientalabs.uy',
+  instagramUrl: 'https://instagram.com/orientalabs.uy',
 
   // Email
   email: 'admin@orientalabs.dev',
