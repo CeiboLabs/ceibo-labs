@@ -30,11 +30,6 @@ export async function saveSettingsAction(
     banner_text_i18n: { es: bannerTextEs, en: bannerTextEn },
     banner_link_url: (formData.get('banner_link_url') as string) || null,
     taking_clients: formData.get('taking_clients') === 'on',
-    contact_email: (formData.get('contact_email') as string) || null,
-    whatsapp_url: (formData.get('whatsapp_url') as string) || null,
-    instagram_url: (formData.get('instagram_url') as string) || null,
-    github_url: (formData.get('github_url') as string) || null,
-    linkedin_url: (formData.get('linkedin_url') as string) || null,
     home_projects_limit: Math.max(1, parseInt(formData.get('home_projects_limit') as string) || 6),
     home_reviews_limit: Math.max(1, parseInt(formData.get('home_reviews_limit') as string) || 4),
   };

@@ -33,7 +33,7 @@ export default async function MaintenancePage({
       ? 'Estamos haciendo mejoras. Volvemos pronto.'
       : "We're currently doing some upgrades. We'll be back online shortly.");
 
-  const whatsappUrl = settings.whatsapp_url || CONTACT.whatsappUrl;
+  const whatsappUrl = CONTACT.whatsappUrl;
 
   return (
     <div className="min-h-screen bg-navy-950 flex flex-col items-center justify-center px-4 text-center">

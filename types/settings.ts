@@ -10,11 +10,6 @@ export interface SiteSettings {
   banner_text_i18n: I18nField | null;
   banner_link_url: string | null;
   taking_clients: boolean;
-  contact_email: string | null;
-  whatsapp_url: string | null;
-  instagram_url: string | null;
-  github_url: string | null;
-  linkedin_url: string | null;
   home_projects_limit: number;
   home_reviews_limit: number;
   updated_at: string;

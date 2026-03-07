@@ -57,11 +57,6 @@ const FIELD_LABELS: Record<string, string> = {
   banner_text_i18n:     'Banner text',
   banner_link_url:      'Banner URL',
   taking_clients:       'Taking clients',
-  contact_email:        'Email',
-  whatsapp_url:         'WhatsApp URL',
-  instagram_url:        'Instagram URL',
-  github_url:           'GitHub URL',
-  linkedin_url:         'LinkedIn URL',
   home_projects_limit:  'Projects limit',
   home_reviews_limit:   'Reviews limit',
 };

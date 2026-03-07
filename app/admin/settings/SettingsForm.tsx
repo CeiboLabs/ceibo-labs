@@ -129,16 +129,6 @@ export function SettingsForm({ settings }: Props) {
         </p>
       </Section>
 
-      <Section title="Contact Links">
-        <div className="grid sm:grid-cols-2 gap-4">
-          <Field name="contact_email" label="Email" defaultValue={settings.contact_email} placeholder="hola@orientallabs.uy" />
-          <Field name="whatsapp_url" label="WhatsApp URL" defaultValue={settings.whatsapp_url} placeholder="https://wa.me/..." />
-          <Field name="instagram_url" label="Instagram URL" defaultValue={settings.instagram_url} placeholder="https://instagram.com/..." />
-          <Field name="github_url" label="GitHub URL" defaultValue={settings.github_url} placeholder="https://github.com/..." />
-          <Field name="linkedin_url" label="LinkedIn URL" defaultValue={settings.linkedin_url} placeholder="https://linkedin.com/..." />
-        </div>
-      </Section>
-
       <Section title="Homepage Limits">
         <div className="grid sm:grid-cols-2 gap-4">
           <Field name="home_projects_limit" label="Max projects shown" type="number" defaultValue={String(settings.home_projects_limit)} placeholder="6" />
