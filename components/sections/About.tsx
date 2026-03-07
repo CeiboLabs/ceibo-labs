@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { StaggerContainer, StaggerItem, AnimatedSection } from '@/components/ui/AnimatedSection';
 import { useTranslation } from '@/lib/i18n/context';
-import { founders, timeline } from '@/lib/data/founders';
+import { founders } from '@/lib/data/founders';
 
 function FounderAvatar({ name, avatar }: { name: string; avatar: string }) {
   const [failed, setFailed] = useState(false);
@@ -149,53 +149,6 @@ export function About() {
             ))}
           </StaggerContainer>
         </div>
-
-        {/* Timeline */}
-        <AnimatedSection>
-          <div className="bg-navy-800/40 border border-navy-600/40 rounded-3xl p-8 sm:p-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-10">
-              {t.about.timelineTitle}
-            </h2>
-
-            <div className="relative">
-              <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-electric-400/40 via-electric-400/20 to-transparent" />
-
-              <div className="space-y-8 sm:space-y-10">
-                {timeline.map((event, idx) => (
-                  <motion.div
-                    key={event.date}
-                    initial={{ opacity: 0, x: idx % 2 === 0 ? -24 : 24 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1, duration: 0.5 }}
-                    className={`relative flex items-start gap-6 sm:gap-0 ${
-                      idx % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'
-                    }`}
-                  >
-                    <div
-                      className={`pl-10 sm:pl-0 flex-1 ${
-                        idx % 2 === 0 ? 'sm:pr-12 sm:text-right' : 'sm:pl-12'
-                      }`}
-                    >
-                      <p className="text-electric-400 text-xs font-semibold tracking-wider uppercase mb-1">
-                        {event.date}
-                      </p>
-                      <h3 className="text-white font-semibold text-lg mb-1">
-                        {event.title[locale]}
-                      </h3>
-                      <p className="text-slate-400 text-sm leading-relaxed">
-                        {event.description[locale]}
-                      </p>
-                    </div>
-
-                    <div className="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 w-3 h-3 rounded-full bg-electric-400 border-2 border-navy-950 shadow-glow z-10 mt-1" />
-                    <div className="hidden sm:block flex-1" />
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
       </div>
     </section>
   );
