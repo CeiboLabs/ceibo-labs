@@ -108,17 +108,6 @@ export function About() {
 
                     <p className="text-slate-400 text-sm leading-relaxed">{founder.bio[locale]}</p>
 
-                    <div className="flex flex-wrap gap-1.5 pt-1">
-                      {founder.skills.slice(0, 4).map((skill) => (
-                        <span
-                          key={skill}
-                          className="px-2 py-0.5 text-xs rounded-md bg-navy-700/80 text-slate-400 border border-navy-600/40"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-
                     <div className="flex items-center gap-3 pt-2">
                       {founder.github && (
                         <a
