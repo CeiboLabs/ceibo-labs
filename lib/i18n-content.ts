@@ -37,3 +37,16 @@ export function hasI18n(
 ): boolean {
   return !!field?.[locale];
 }
+
+/**
+ * Pick the best media URL (image, etc.) from an i18n JSONB field.
+ * Priority: requested locale → 'es' → 'en' → ''
+ * Identical to pickI18n but named explicitly for media fields for clarity.
+ */
+export function pickI18nMedia(
+  field: I18nField | null | undefined,
+  locale: Locale
+): string {
+  if (!field) return '';
+  return field[locale] ?? field['es'] ?? field['en'] ?? '';
+}

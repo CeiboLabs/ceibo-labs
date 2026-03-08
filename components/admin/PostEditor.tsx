@@ -21,6 +21,7 @@ interface PostData {
   content_en: string;
   tags: string;
   cover_image_url: string;
+  cover_image_url_en: string;
   status: 'draft' | 'published';
 }
 
@@ -30,6 +31,7 @@ interface InitialPost extends Partial<Omit<PostData, 'tags'>> {
   title_i18n?: Record<string, string> | null;
   excerpt_i18n?: Record<string, string> | null;
   content_i18n?: Record<string, string> | null;
+  cover_image_url_i18n?: Record<string, string> | null;
 }
 
 function slugify(str: string) {
@@ -71,7 +73,8 @@ export function PostEditor({ initial }: Props) {
     tags: Array.isArray(initial?.tags)
       ? (initial.tags as string[]).join(', ')
       : (initial?.tags as string) ?? '',
-    cover_image_url: initial?.cover_image_url ?? '',
+    cover_image_url: initial?.cover_image_url_i18n?.es || initial?.cover_image_url || '',
+    cover_image_url_en: initial?.cover_image_url_i18n?.en || '',
     status: initial?.status ?? 'draft',
   });
   const [preview, setPreview] = useState(false);
@@ -119,11 +122,12 @@ export function PostEditor({ initial }: Props) {
         }
       } else {
         const { data } = supabase.storage.from('blog').getPublicUrl(path);
-        setForm((f) => ({ ...f, cover_image_url: data.publicUrl }));
+        const field = langTab === 'es' ? 'cover_image_url' : 'cover_image_url_en';
+        setForm((f) => ({ ...f, [field]: data.publicUrl }));
       }
       setUploading(false);
     },
-    []
+    [langTab]
   );
 
   async function save(targetStatus: 'draft' | 'published') {
@@ -136,6 +140,10 @@ export function PostEditor({ initial }: Props) {
       .map((t) => t.trim())
       .filter(Boolean);
 
+    const coverI18n: Record<string, string> = {};
+    if (form.cover_image_url) coverI18n.es = form.cover_image_url;
+    if (form.cover_image_url_en) coverI18n.en = form.cover_image_url_en;
+
     const payload = {
       title_i18n: { es: form.title, en: form.title_en },
       slug: finalSlug,
@@ -143,6 +151,7 @@ export function PostEditor({ initial }: Props) {
       content_i18n: { es: form.content, en: form.content_en },
       tags: tagsArray,
       cover_image_url: form.cover_image_url || null,
+      cover_image_url_i18n: coverI18n,
       status: targetStatus,
       published_at:
         targetStatus === 'published' && form.status !== 'published'
@@ -265,60 +274,75 @@ export function PostEditor({ initial }: Props) {
             />
           </div>
 
-          {/* Tags + Cover — ES tab only */}
+          {/* Tags — ES tab only */}
           {langTab === 'es' && (
-            <>
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">
-                  Tags <span className="text-slate-500 font-normal">(comma-separated)</span>
-                </label>
-                <input
-                  value={form.tags}
-                  onChange={set('tags')}
-                  placeholder="Next.js, AI, Engineering"
-                  className={inputClass}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">Cover image</label>
-                <div className="flex items-center gap-3 flex-wrap">
-                  <label className="flex items-center gap-2 cursor-pointer px-3.5 py-2 rounded-xl bg-navy-800/60 border border-navy-600/50 text-slate-400 hover:text-white text-sm transition-colors hover:border-slate-500">
-                    <Upload size={14} />
-                    {uploading ? 'Uploading…' : 'Upload image'}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleCoverUpload}
-                      className="sr-only"
-                      disabled={uploading}
-                    />
-                  </label>
-                  {form.cover_image_url && (
-                    <div className="flex items-center gap-2">
-                      <span className="text-slate-400 text-xs truncate max-w-xs">
-                        {form.cover_image_url.split('/').pop()}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => setForm((f) => ({ ...f, cover_image_url: '' }))}
-                        className="text-slate-500 hover:text-red-400 transition-colors"
-                      >
-                        <X size={13} />
-                      </button>
-                    </div>
-                  )}
-                </div>
-                {uploadError && <p className="mt-2 text-amber-400 text-xs">{uploadError}</p>}
-                <input
-                  value={form.cover_image_url}
-                  onChange={set('cover_image_url')}
-                  placeholder="Or paste an image URL"
-                  className={`mt-2 ${inputClass}`}
-                />
-              </div>
-            </>
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">
+                Tags <span className="text-slate-500 font-normal">(comma-separated)</span>
+              </label>
+              <input
+                value={form.tags}
+                onChange={set('tags')}
+                placeholder="Next.js, AI, Engineering"
+                className={inputClass}
+              />
+            </div>
           )}
+
+          {/* Cover image — per language */}
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="block text-sm font-medium text-slate-300">
+                Cover image {langTab === 'es' && <span className="text-slate-500 font-normal">(recommended)</span>}
+              </label>
+              {langTab === 'en' && (
+                <button
+                  type="button"
+                  onClick={() => setForm((f) => ({ ...f, cover_image_url_en: f.cover_image_url }))}
+                  className="text-xs text-electric-400 hover:text-electric-300 transition-colors"
+                >
+                  Copy ES cover to EN
+                </button>
+              )}
+            </div>
+            <div className="flex items-center gap-3 flex-wrap">
+              <label className="flex items-center gap-2 cursor-pointer px-3.5 py-2 rounded-xl bg-navy-800/60 border border-navy-600/50 text-slate-400 hover:text-white text-sm transition-colors hover:border-slate-500">
+                <Upload size={14} />
+                {uploading ? 'Uploading…' : 'Upload image'}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleCoverUpload}
+                  className="sr-only"
+                  disabled={uploading}
+                />
+              </label>
+              {(langTab === 'es' ? form.cover_image_url : form.cover_image_url_en) && (
+                <div className="flex items-center gap-2">
+                  <span className="text-slate-400 text-xs truncate max-w-xs">
+                    {(langTab === 'es' ? form.cover_image_url : form.cover_image_url_en).split('/').pop()}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setForm((f) => langTab === 'es'
+                      ? { ...f, cover_image_url: '' }
+                      : { ...f, cover_image_url_en: '' }
+                    )}
+                    className="text-slate-500 hover:text-red-400 transition-colors"
+                  >
+                    <X size={13} />
+                  </button>
+                </div>
+              )}
+            </div>
+            {uploadError && <p className="mt-2 text-amber-400 text-xs">{uploadError}</p>}
+            <input
+              value={langTab === 'es' ? form.cover_image_url : form.cover_image_url_en}
+              onChange={set(langTab === 'es' ? 'cover_image_url' : 'cover_image_url_en')}
+              placeholder="Or paste an image URL"
+              className={`mt-2 ${inputClass}`}
+            />
+          </div>
 
           {/* Content */}
           <div>

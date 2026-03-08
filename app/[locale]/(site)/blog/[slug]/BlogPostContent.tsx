@@ -6,7 +6,7 @@ import { ArrowLeft, Calendar, Tag, ArrowRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useTranslation } from '@/lib/i18n/context';
-import { pickI18n } from '@/lib/i18n-content';
+import { pickI18n, pickI18nMedia } from '@/lib/i18n-content';
 import type { Locale } from '@/lib/i18n/translations';
 
 interface Post {
@@ -14,6 +14,7 @@ interface Post {
   slug: string;
   tags: string[];
   cover_image_url: string | null;
+  cover_image_url_i18n: Record<string, string> | null;
   published_at: string | null;
   status: string;
   title_i18n: Record<string, string> | null;
@@ -45,6 +46,7 @@ export function BlogPostContent({
   const title = pickI18n(post.title_i18n, locale);
   const excerpt = pickI18n(post.excerpt_i18n, locale);
   const content = pickI18n(post.content_i18n, locale);
+  const coverImage = pickI18nMedia(post.cover_image_url_i18n, locale) || post.cover_image_url || '';
 
   return (
     <div className="min-h-screen bg-navy-950 pt-24 pb-24">
@@ -63,10 +65,10 @@ export function BlogPostContent({
           {t.blog.backToBlog}
         </Link>
 
-        {post.cover_image_url && (
+        {coverImage && (
           <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-navy-800 mb-8">
             <Image
-              src={post.cover_image_url}
+              src={coverImage}
               alt={title}
               fill
               className="object-cover"

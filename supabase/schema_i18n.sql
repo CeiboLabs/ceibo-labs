@@ -9,9 +9,10 @@
 -- ── POSTS ─────────────────────────────────────────────────────────────────────
 
 ALTER TABLE posts
-  ADD COLUMN IF NOT EXISTS title_i18n   jsonb NOT NULL DEFAULT '{}'::jsonb,
-  ADD COLUMN IF NOT EXISTS excerpt_i18n jsonb          DEFAULT '{}'::jsonb,
-  ADD COLUMN IF NOT EXISTS content_i18n jsonb NOT NULL DEFAULT '{}'::jsonb;
+  ADD COLUMN IF NOT EXISTS title_i18n          jsonb NOT NULL DEFAULT '{}'::jsonb,
+  ADD COLUMN IF NOT EXISTS excerpt_i18n        jsonb          DEFAULT '{}'::jsonb,
+  ADD COLUMN IF NOT EXISTS content_i18n        jsonb NOT NULL DEFAULT '{}'::jsonb,
+  ADD COLUMN IF NOT EXISTS cover_image_url_i18n jsonb         DEFAULT '{}'::jsonb;
 
 -- Backfill existing single-language data into 'es'
 UPDATE posts
@@ -24,6 +25,16 @@ SET
                  END,
   content_i18n = jsonb_build_object('es', content)
 WHERE title_i18n = '{}'::jsonb;   -- only rows not yet migrated
+
+-- Backfill cover_image_url → cover_image_url_i18n
+-- Migrates existing cover into 'es'; also copies to 'en' so nothing breaks.
+UPDATE posts
+SET cover_image_url_i18n = CASE
+  WHEN cover_image_url IS NOT NULL AND cover_image_url != ''
+  THEN jsonb_build_object('es', cover_image_url, 'en', cover_image_url)
+  ELSE '{}'::jsonb
+END
+WHERE cover_image_url_i18n = '{}'::jsonb;
 
 -- ── PROJECTS ──────────────────────────────────────────────────────────────────
 

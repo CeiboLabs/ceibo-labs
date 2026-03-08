@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { SITE } from '@/lib/constants';
-import { pickI18n } from '@/lib/i18n-content';
+import { pickI18n, pickI18nMedia } from '@/lib/i18n-content';
 import { BlogPostContent } from './BlogPostContent';
 import type { Locale } from '@/lib/i18n/translations';
 
@@ -13,6 +13,7 @@ interface Post {
   slug: string;
   tags: string[];
   cover_image_url: string | null;
+  cover_image_url_i18n: Record<string, string> | null;
   published_at: string | null;
   status: string;
   title_i18n: Record<string, string> | null;
@@ -24,7 +25,7 @@ async function getPost(slug: string, isPreview = false): Promise<Post | null> {
   const supabase = await createClient();
   const { data } = await supabase
     .from('posts')
-    .select('id, slug, tags, cover_image_url, published_at, status, title_i18n, excerpt_i18n, content_i18n')
+    .select('id, slug, tags, cover_image_url, cover_image_url_i18n, published_at, status, title_i18n, excerpt_i18n, content_i18n')
     .eq('slug', slug)
     .single();
 
@@ -38,7 +39,7 @@ async function getRelatedPosts(currentId: string, tags: string[]): Promise<Post[
   const supabase = await createClient();
   const { data } = await supabase
     .from('posts')
-    .select('id, slug, tags, published_at, status, cover_image_url, title_i18n, excerpt_i18n, content_i18n')
+    .select('id, slug, tags, published_at, status, cover_image_url, cover_image_url_i18n, title_i18n, excerpt_i18n, content_i18n')
     .eq('status', 'published')
     .neq('id', currentId)
     .contains('tags', tags.slice(0, 1))
@@ -58,8 +59,9 @@ export async function generateMetadata({
 
   const title = pickI18n(post.title_i18n, locale as Locale);
   const excerpt = pickI18n(post.excerpt_i18n, locale as Locale);
-  const ogImage = post.cover_image_url
-    ? post.cover_image_url
+  const localizedCover = pickI18nMedia(post.cover_image_url_i18n, locale as Locale) || post.cover_image_url || '';
+  const ogImage = localizedCover
+    ? localizedCover
     : `${SITE.url}/api/og?type=blog&title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(excerpt)}`;
 
   return {
