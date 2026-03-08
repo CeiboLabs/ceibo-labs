@@ -136,7 +136,9 @@ export function Navbar() {
             <Button
               variant="primary"
               size="sm"
-              href={CONTACT.whatsappUrl}
+              href={CONTACT.emailUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden sm:inline-flex"
             >
               {t.nav.getInTouch}
@@ -212,7 +214,9 @@ export function Navbar() {
                 <Button
                   variant="primary"
                   size="lg"
-                  href={CONTACT.whatsappUrl}
+                  href={CONTACT.emailUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full justify-center"
                 >
                   {t.nav.getInTouch}
