@@ -11,6 +11,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
   asChild?: boolean;
   href?: string;
+  target?: string;
+  rel?: string;
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
@@ -31,7 +33,7 @@ const sizeClasses: Record<ButtonSize, string> = {
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', children, href, ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', children, href, target, rel, ...props }, ref) => {
     const classes = cn(
       'inline-flex items-center justify-center font-medium cursor-pointer select-none',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-400 focus-visible:ring-offset-2',
@@ -44,7 +46,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     if (href) {
       return (
-        <a href={href} className={classes}>
+        <a href={href} target={target} rel={rel} className={classes}>
           {children}
         </a>
       );

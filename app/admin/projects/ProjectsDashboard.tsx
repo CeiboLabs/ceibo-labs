@@ -34,14 +34,18 @@ export function ProjectsDashboard({ initialProjects }: { initialProjects: DbProj
   const [, startTransition] = useTransition();
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
   const [deleting, startDeleteTransition] = useTransition();
+  const [statusTarget, setStatusTarget] = useState<DbProject | null>(null);
   const router = useRouter();
   const supabase = createClient();
 
-  async function toggleStatus(p: DbProject) {
+  async function confirmToggleStatus() {
+    if (!statusTarget) return;
+    const p = statusTarget;
     const newStatus = p.status === 'published' ? 'draft' : 'published';
     const { error } = await supabase.from('projects').update({ status: newStatus }).eq('id', p.id);
     if (!error) {
       setProjects((prev) => prev.map((x) => x.id === p.id ? { ...x, status: newStatus as DbProject['status'] } : x));
+      setStatusTarget(null);
       startTransition(() => router.refresh());
     }
   }
@@ -148,7 +152,7 @@ export function ProjectsDashboard({ initialProjects }: { initialProjects: DbProj
                         className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-navy-700/60 transition-colors" title={p.status === 'published' ? 'View live' : 'Preview'}>
                         <ExternalLink size={14} />
                       </Link>
-                      <button onClick={() => toggleStatus(p)}
+                      <button onClick={() => setStatusTarget(p)}
                         className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-navy-700/60 transition-colors"
                         title={p.status === 'published' ? 'Unpublish' : 'Publish'}>
                         {p.status === 'published' ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -189,7 +193,7 @@ export function ProjectsDashboard({ initialProjects }: { initialProjects: DbProj
                       className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-navy-700/60 transition-colors">
                       <PenLine size={14} />
                     </Link>
-                    <button onClick={() => toggleStatus(p)}
+                    <button onClick={() => setStatusTarget(p)}
                       className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-navy-700/60 transition-colors">
                       {p.status === 'published' ? <EyeOff size={14} /> : <Eye size={14} />}
                     </button>
@@ -212,6 +216,15 @@ export function ProjectsDashboard({ initialProjects }: { initialProjects: DbProj
         loading={deleting}
         onCancel={() => setDeleteTarget(null)}
         onConfirm={() => deleteTarget && handleDelete(deleteTarget)}
+      />
+      <ConfirmDialog
+        open={statusTarget !== null}
+        title={statusTarget?.status === 'published' ? 'Unpublish project?' : 'Publish project?'}
+        description={statusTarget?.status === 'published'
+          ? 'This will hide the project from the public site.'
+          : 'This will make the project visible on the public site.'}
+        onCancel={() => setStatusTarget(null)}
+        onConfirm={confirmToggleStatus}
       />
     </div>
   );

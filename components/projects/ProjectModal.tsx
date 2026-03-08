@@ -99,13 +99,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     View full project <ArrowRight size={14} />
                   </Link>
                   {project.live_url && (
-                    <Button variant="primary" size="md" href={project.live_url}>
+                    <Button variant="primary" size="md" href={project.live_url} target="_blank" rel="noopener noreferrer">
                       <ExternalLink size={15} />
                       {t.projects.liveDemo}
                     </Button>
                   )}
                   {project.github_url && (
-                    <Button variant="secondary" size="md" href={project.github_url}>
+                    <Button variant="secondary" size="md" href={project.github_url} target="_blank" rel="noopener noreferrer">
                       <Github size={15} />
                       {t.projects.viewCode}
                     </Button>
