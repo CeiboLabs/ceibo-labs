@@ -12,7 +12,8 @@ import type { Review } from '@/types/review';
 
 interface FormData {
   author_name: string;
-  author_title: string;
+  author_title_es: string;
+  author_title_en: string;
   author_company: string;
   rating: number;
   quote: string;
@@ -78,7 +79,8 @@ export function ReviewEditor({ initial }: Props) {
   const [langTab, setLangTab] = useState<'es' | 'en'>('es');
   const [form, setForm] = useState<FormData>({
     author_name: initial?.author_name ?? '',
-    author_title: initial?.author_title ?? '',
+    author_title_es: initial?.author_title_i18n?.es || initial?.author_title || '',
+    author_title_en: initial?.author_title_i18n?.en || '',
     author_company: initial?.author_company ?? '',
     rating: initial?.rating ?? 5,
     quote: initial?.quote_i18n?.es || initial?.quote || '',
@@ -156,7 +158,7 @@ export function ReviewEditor({ initial }: Props) {
 
     const payload = {
       author_name: form.author_name.trim(),
-      author_title: form.author_title.trim() || null,
+      author_title_i18n: { es: form.author_title_es.trim(), en: form.author_title_en.trim() },
       author_company: form.author_company.trim() || null,
       author_avatar_url: form.author_avatar_url.trim() || null,
       rating: form.rating,
@@ -256,6 +258,30 @@ export function ReviewEditor({ initial }: Props) {
           />
         </div>
 
+        {/* Author title — shown on both tabs */}
+        <div>
+          <div className="flex items-center justify-between mb-1.5">
+            <label className={labelClass} style={{ marginBottom: 0 }}>
+              Author title{langTab === 'es' && <span className="ml-1 text-slate-500 font-normal text-xs">(recommended)</span>}
+            </label>
+            {langTab === 'en' && (
+              <button
+                type="button"
+                onClick={() => setForm((f) => ({ ...f, author_title_en: f.author_title_es }))}
+                className="text-xs text-electric-400 hover:text-electric-300 transition-colors"
+              >
+                Copy ES → EN
+              </button>
+            )}
+          </div>
+          <input
+            value={langTab === 'es' ? form.author_title_es : form.author_title_en}
+            onChange={set(langTab === 'es' ? 'author_title_es' : 'author_title_en')}
+            placeholder={langTab === 'es' ? 'Fundador & CEO' : 'Founder & CEO'}
+            className={inputClass}
+          />
+        </div>
+
         {/* Non-translatable fields — ES tab only */}
         {langTab === 'es' && <>
         {/* Author name */}
@@ -269,26 +295,15 @@ export function ReviewEditor({ initial }: Props) {
           />
         </div>
 
-        {/* Author title + company */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className={labelClass}>Author title</label>
-            <input
-              value={form.author_title}
-              onChange={set('author_title')}
-              placeholder="Founder & CEO"
-              className={inputClass}
-            />
-          </div>
-          <div>
-            <label className={labelClass}>Company</label>
-            <input
-              value={form.author_company}
-              onChange={set('author_company')}
-              placeholder="Startup Name"
-              className={inputClass}
-            />
-          </div>
+        {/* Company */}
+        <div>
+          <label className={labelClass}>Company</label>
+          <input
+            value={form.author_company}
+            onChange={set('author_company')}
+            placeholder="Startup Name"
+            className={inputClass}
+          />
         </div>
 
         {/* Rating */}

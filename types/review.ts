@@ -3,7 +3,9 @@ import type { I18nField } from '@/lib/i18n-content';
 export interface Review {
   id: string;
   author_name: string;
+  /** @deprecated Use author_title_i18n instead */
   author_title: string | null;
+  author_title_i18n: I18nField | null;
   author_company: string | null;
   author_avatar_url: string | null;
   rating: number;

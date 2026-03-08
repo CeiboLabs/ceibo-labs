@@ -7,7 +7,8 @@
 create table if not exists reviews (
   id                uuid        primary key default gen_random_uuid(),
   author_name       text        not null,
-  author_title      text,
+  author_title      text,                               -- deprecated: use author_title_i18n
+  author_title_i18n jsonb       not null default '{}'::jsonb,
   author_company    text,
   author_avatar_url text,
   rating            int         not null default 5

@@ -103,9 +103,9 @@ export function Testimonials({ dbReviews }: Props) {
                     )}
                     <div>
                       <p className="text-white text-sm font-semibold">{review.author_name}</p>
-                      {(review.author_title || review.author_company) && (
+                      {(review.author_title_i18n || review.author_title || review.author_company) && (
                         <p className="text-slate-500 text-xs">
-                          {[review.author_title, review.author_company].filter(Boolean).join(' · ')}
+                          {[pickI18n(review.author_title_i18n, locale) || review.author_title, review.author_company].filter(Boolean).join(' · ')}
                         </p>
                       )}
                     </div>
