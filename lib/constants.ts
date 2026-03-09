@@ -3,9 +3,9 @@
 // ─────────────────────────────────────────────────────────────
 export const CONTACT = {
   // WhatsApp: include country code, no spaces or dashes
-  whatsappNumber: '59899000000', // e.g. Uruguay (+598) + local number
-  whatsappUrl: 'https://wa.me/59899000000',
-  whatsappDisplay: '+598 99 000 000',
+  whatsappNumber: '59892654214', // e.g. Uruguay (+598) + local number
+  whatsappUrl: 'https://wa.me/59892654214',
+  whatsappDisplay: '+598 92 654 214',
 
   // Instagram
   instagramHandle: 'orientalabs.uy',
