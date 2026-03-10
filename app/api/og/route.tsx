@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { type NextRequest } from 'next/server';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 // ── Logo cache (persists across requests in the same edge isolate) ──────────
 let cachedLogoSrc: string | null = null;
