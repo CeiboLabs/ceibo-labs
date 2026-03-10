@@ -30,13 +30,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
           <div className="space-y-3">
             <Logo />
-            <p className="text-slate-500 text-sm leading-relaxed max-w-xs">
+            <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               {SITE.tagline}
             </p>
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-4">
+            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">
               {t.footer.navigate}
             </h3>
             <ul className="space-y-2" role="list">
@@ -44,7 +44,7 @@ export function Footer() {
                 <li key={href}>
                   <a
                     href={href}
-                    className="text-sm text-slate-400 hover:text-electric-400 transition-colors"
+                    className="block py-1 text-sm text-slate-400 hover:text-electric-400 transition-colors"
                   >
                     {label}
                   </a>
@@ -54,7 +54,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-4">
+            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">
               {t.footer.getInTouch}
             </h3>
             <ul className="space-y-2" role="list">
@@ -64,7 +64,7 @@ export function Footer() {
                     href={href}
                     target={href.startsWith('mailto') ? undefined : '_blank'}
                     rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                    className="flex items-center gap-2 text-sm text-slate-400 hover:text-electric-400 transition-colors"
+                    className="flex items-center gap-2 py-1 text-sm text-slate-400 hover:text-electric-400 transition-colors"
                   >
                     <Icon size={14} />
                     {label}
@@ -76,10 +76,10 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-8 border-t border-navy-700/50">
-          <p className="text-xs text-slate-600">
+          <p className="text-xs text-slate-500">
             &copy; {new Date().getFullYear()} Oriental Labs. {t.footer.copyright}
           </p>
-          <p className="text-xs text-slate-600">{t.footer.builtIn}</p>
+          <p className="text-xs text-slate-500">{t.footer.builtIn}</p>
         </div>
       </div>
     </footer>

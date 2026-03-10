@@ -89,14 +89,14 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
           <div className="flex items-center gap-3 mt-1 pt-3 border-t border-navy-600/40" onClick={(e) => e.stopPropagation()}>
             {project.live_url && (
               <a href={project.live_url} target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-electric-400 transition-colors">
+                className="flex items-center gap-1.5 py-1.5 text-xs text-slate-400 hover:text-electric-400 transition-colors">
                 <ExternalLink size={12} />
                 {t.projects.liveDemo}
               </a>
             )}
             {project.github_url && (
               <a href={project.github_url} target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-electric-400 transition-colors">
+                className="flex items-center gap-1.5 py-1.5 text-xs text-slate-400 hover:text-electric-400 transition-colors">
                 <Github size={12} />
                 {t.projects.viewCode}
               </a>
