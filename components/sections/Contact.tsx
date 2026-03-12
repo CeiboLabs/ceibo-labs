@@ -2,6 +2,7 @@
 
 import { MessageCircle, Mail, Instagram, Copy, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/ui/AnimatedSection';
 import { useClipboard } from '@/lib/hooks/useClipboard';
 import { useTranslation } from '@/lib/i18n/context';
@@ -9,9 +10,10 @@ import { CONTACT } from '@/lib/constants';
 
 interface CopyButtonProps {
   value: string;
+  activeClass?: string;
 }
 
-function CopyButton({ value }: CopyButtonProps) {
+function CopyButton({ value, activeClass = 'hover:text-electric-400 hover:bg-electric-400/10' }: CopyButtonProps) {
   const { copied, copy } = useClipboard();
   const { t } = useTranslation();
 
@@ -19,10 +21,10 @@ function CopyButton({ value }: CopyButtonProps) {
     <button
       onClick={() => copy(value)}
       aria-label={copied ? t.contact.copied : t.contact.copy}
-      className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-electric-400 transition-colors px-2 py-1 rounded-lg hover:bg-electric-400/10"
+      className={`flex items-center gap-1.5 text-xs transition-colors px-2 py-1 rounded-lg ${copied ? activeClass : `text-slate-500 ${activeClass}`}`}
     >
       {copied ? (
-        <Check size={12} className="text-emerald-400" />
+        <Check size={12} />
       ) : (
         <Copy size={12} />
       )}
@@ -32,7 +34,7 @@ function CopyButton({ value }: CopyButtonProps) {
 }
 
 export function Contact() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   return (
     <section id="contact" aria-label="Contact Oriental Labs" className="relative py-24 sm:py-32 bg-navy-950">
@@ -75,31 +77,32 @@ export function Contact() {
                 <p className="text-slate-400 text-sm">{CONTACT.whatsappDisplay}</p>
               </div>
               <div onClick={(e) => e.preventDefault()}>
-                <CopyButton value={CONTACT.whatsappDisplay} />
+                <CopyButton value={CONTACT.whatsappDisplay} activeClass="hover:text-[#25D366] hover:bg-[#25D366]/10 text-[#25D366]" />
               </div>
             </motion.a>
           </StaggerItem>
 
           {/* Email */}
           <StaggerItem>
-            <motion.a
-              href={CONTACT.emailUrl}
+            <motion.div
               whileHover={{ y: -4, scale: 1.01 }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.2 }}
               className="flex flex-col items-start gap-3 p-6 rounded-2xl bg-electric-400/8 border border-electric-400/25 hover:border-electric-400/50 hover:bg-electric-400/12 transition-colors group"
             >
-              <div className="w-11 h-11 rounded-xl bg-electric-400/12 border border-electric-400/25 flex items-center justify-center group-hover:bg-electric-400/20 transition-colors">
-                <Mail size={20} className="text-electric-400" />
+              <Link href={`/${locale}/formulario`} className="flex flex-col gap-3 w-full">
+                <div className="w-11 h-11 rounded-xl bg-electric-400/12 border border-electric-400/25 flex items-center justify-center group-hover:bg-electric-400/20 transition-colors">
+                  <Mail size={20} className="text-electric-400" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold mb-0.5">Email</p>
+                  <p className="text-slate-400 text-sm break-all">{CONTACT.email}</p>
+                </div>
+              </Link>
+              <div onClick={(e) => e.stopPropagation()}>
+                <CopyButton value={CONTACT.email} activeClass="hover:text-electric-400 hover:bg-electric-400/10 text-electric-400" />
               </div>
-              <div>
-                <p className="text-white font-semibold mb-0.5">Email</p>
-                <p className="text-slate-400 text-sm break-all">{CONTACT.email}</p>
-              </div>
-              <div onClick={(e) => e.preventDefault()}>
-                <CopyButton value={CONTACT.email} />
-              </div>
-            </motion.a>
+            </motion.div>
           </StaggerItem>
 
           {/* Instagram */}
@@ -121,7 +124,7 @@ export function Contact() {
                 <p className="text-slate-400 text-sm">@{CONTACT.instagramHandle}</p>
               </div>
               <div onClick={(e) => e.preventDefault()}>
-                <CopyButton value={`@${CONTACT.instagramHandle}`} />
+                <CopyButton value={`@${CONTACT.instagramHandle}`} activeClass="hover:text-pink-400 hover:bg-pink-400/10 text-pink-400" />
               </div>
             </motion.a>
           </StaggerItem>

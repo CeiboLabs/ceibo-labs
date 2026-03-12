@@ -70,11 +70,17 @@ function StarPicker({
   );
 }
 
-interface Props {
-  initial?: Partial<Review>;
+interface ProjectOption {
+  slug: string;
+  title: string;
 }
 
-export function ReviewEditor({ initial }: Props) {
+interface Props {
+  initial?: Partial<Review>;
+  publishedProjects?: ProjectOption[];
+}
+
+export function ReviewEditor({ initial, publishedProjects = [] }: Props) {
   const router = useRouter();
   const [langTab, setLangTab] = useState<'es' | 'en'>('es');
   const [form, setForm] = useState<FormData>({
@@ -378,13 +384,27 @@ export function ReviewEditor({ initial }: Props) {
             Linked project{' '}
             <span className="text-slate-500 font-normal">(optional)</span>
           </label>
-          <input
-            value={form.project_slug}
-            onChange={set('project_slug')}
-            placeholder="ai-content-assistant"
-            className={inputClass}
-          />
-          <p className="mt-1 text-xs text-slate-500">Enter the project slug exactly as it appears in the database.</p>
+          {publishedProjects.length > 0 ? (
+            <select
+              value={form.project_slug}
+              onChange={set('project_slug')}
+              className={inputClass}
+            >
+              <option value="">— None —</option>
+              {publishedProjects.map((p) => (
+                <option key={p.slug} value={p.slug}>
+                  {p.title} ({p.slug})
+                </option>
+              ))}
+            </select>
+          ) : (
+            <input
+              value={form.project_slug}
+              onChange={set('project_slug')}
+              placeholder="ai-content-assistant"
+              className={inputClass}
+            />
+          )}
         </div>
 
         {/* Source URL */}

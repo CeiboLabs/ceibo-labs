@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   FileText, Star, FolderOpen, Settings, ScrollText,
-  ExternalLink, LogOut, Menu, X,
+  ExternalLink, LogOut, Menu, X, Receipt,
 } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
@@ -13,11 +13,12 @@ import { logoutAction } from '@/app/admin/actions';
 import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = [
-  { href: '/admin',           label: 'Posts',    icon: FileText,    exact: true  },
-  { href: '/admin/reviews',   label: 'Reviews',  icon: Star,        exact: false },
-  { href: '/admin/projects',  label: 'Projects', icon: FolderOpen,  exact: false },
-  { href: '/admin/settings',  label: 'Settings', icon: Settings,    exact: false },
-  { href: '/admin/logs',      label: 'Logs',     icon: ScrollText,  exact: false },
+  { href: '/admin',                label: 'Posts',        icon: FileText,   exact: true  },
+  { href: '/admin/reviews',        label: 'Reviews',      icon: Star,       exact: false },
+  { href: '/admin/projects',       label: 'Projects',     icon: FolderOpen, exact: false },
+  { href: '/admin/presupuestos',   label: 'Presupuestos', icon: Receipt,    exact: false },
+  { href: '/admin/settings',       label: 'Settings',     icon: Settings,   exact: false },
+  { href: '/admin/logs',           label: 'Logs',         icon: ScrollText, exact: false },
 ];
 
 export function AdminNav() {
