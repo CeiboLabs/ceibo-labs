@@ -47,5 +47,18 @@ export default async function BlogPage({
     .eq('status', 'published')
     .order('published_at', { ascending: false });
 
-  return <BlogIndex locale={locale as Locale} posts={posts ?? []} />;
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Blog', item: `${SITE.url}/${locale}/blog` },
+    ],
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <BlogIndex locale={locale as Locale} posts={posts ?? []} />
+    </>
+  );
 }

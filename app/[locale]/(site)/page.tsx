@@ -40,6 +40,8 @@ export async function generateMetadata({
       },
     },
     openGraph: {
+      type: 'website',
+      url: `${SITE.url}/${locale}`,
       title,
       description,
       images: ['/og-image.jpg'],
@@ -47,12 +49,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Home({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
+export default async function Home() {
   const settings = await getSiteSettings();
 
   const [dbReviews, dbProjects] = await Promise.all([
