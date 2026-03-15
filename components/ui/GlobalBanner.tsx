@@ -79,14 +79,28 @@ export function GlobalBanner({ text, linkUrl, imageUrl, title, subtitle, locale 
             )}
             {linkUrl && (
               <div className="pt-1">
-                <a
-                  href={linkUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block px-5 py-2.5 rounded-xl bg-electric-500 hover:bg-electric-400 text-white text-sm font-semibold transition-colors"
-                >
-                  {learnMore}
-                </a>
+                {linkUrl.startsWith('#') ? (
+                  <button
+                    onClick={() => {
+                      dismiss();
+                      setTimeout(() => {
+                        document.querySelector(linkUrl)?.scrollIntoView({ behavior: 'smooth' });
+                      }, 150);
+                    }}
+                    className="inline-block px-5 py-2.5 rounded-xl bg-electric-500 hover:bg-electric-400 text-white text-sm font-semibold transition-colors"
+                  >
+                    {learnMore}
+                  </button>
+                ) : (
+                  <a
+                    href={linkUrl.startsWith('/') ? `/${locale}${linkUrl}` : linkUrl}
+                    target={linkUrl.startsWith('/') ? '_self' : '_blank'}
+                    rel={linkUrl.startsWith('/') ? undefined : 'noopener noreferrer'}
+                    className="inline-block px-5 py-2.5 rounded-xl bg-electric-500 hover:bg-electric-400 text-white text-sm font-semibold transition-colors"
+                  >
+                    {learnMore}
+                  </a>
+                )}
               </div>
             )}
           </div>
