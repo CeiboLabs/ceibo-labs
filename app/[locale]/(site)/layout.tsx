@@ -15,10 +15,22 @@ async function BannerLoader({ locale }: { locale: string }) {
 
   if (!settings.banner_enabled || !bannerText) return null;
 
+  const bannerTitle = settings.banner_title_i18n
+    ? pickI18n(settings.banner_title_i18n, locale as Locale)
+    : null;
+
+  const bannerSubtitle = settings.banner_subtitle_i18n
+    ? pickI18n(settings.banner_subtitle_i18n, locale as Locale)
+    : null;
+
   return (
     <GlobalBanner
       text={bannerText}
       linkUrl={settings.banner_link_url ?? undefined}
+      imageUrl={settings.banner_image_url ?? undefined}
+      title={bannerTitle}
+      subtitle={bannerSubtitle}
+      locale={locale}
     />
   );
 }

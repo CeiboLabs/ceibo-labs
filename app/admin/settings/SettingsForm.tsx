@@ -1,6 +1,7 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useRef, useState } from 'react';
+import Image from 'next/image';
 import { saveSettingsAction } from './actions';
 import type { SiteSettings } from '@/types/settings';
 
@@ -81,6 +82,13 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export function SettingsForm({ settings }: Props) {
   const [state, formAction, pending] = useActionState(saveSettingsAction, initialState);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(settings.banner_image_url ?? null);
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) setPreviewUrl(URL.createObjectURL(file));
+  }
 
   return (
     <form action={formAction} className="space-y-6">
@@ -113,13 +121,51 @@ export function SettingsForm({ settings }: Props) {
         </div>
       </Section>
 
-      <Section title="Global Banner">
+      <Section title="Global Banner (Modal)">
         <Toggle name="banner_enabled" label="Show banner on site" defaultChecked={settings.banner_enabled} />
         <div className="grid sm:grid-cols-2 gap-3">
-          <Field name="banner_text_es" label="Banner text — ES" defaultValue={settings.banner_text_i18n?.es ?? settings.banner_text ?? ''} placeholder="🚀 ¡Lanzamos algo nuevo!" />
-          <Field name="banner_text_en" label="Banner text — EN" defaultValue={settings.banner_text_i18n?.en ?? ''} placeholder="🚀 We just launched something new!" />
+          <Field name="banner_title_es" label="Title — ES" defaultValue={settings.banner_title_i18n?.es ?? ''} placeholder="¡Nuevo proyecto disponible!" />
+          <Field name="banner_title_en" label="Title — EN" defaultValue={settings.banner_title_i18n?.en ?? ''} placeholder="New project available!" />
         </div>
-        <Field name="banner_link_url" label="Banner link URL (optional)" defaultValue={settings.banner_link_url} placeholder="https://..." />
+        <div className="grid sm:grid-cols-2 gap-3">
+          <Field name="banner_subtitle_es" label="Subtitle — ES" defaultValue={settings.banner_subtitle_i18n?.es ?? ''} placeholder="Mirá lo que construimos." />
+          <Field name="banner_subtitle_en" label="Subtitle — EN" defaultValue={settings.banner_subtitle_i18n?.en ?? ''} placeholder="Check out what we built." />
+        </div>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <Field name="banner_text_es" label="Text (fallback) — ES" defaultValue={settings.banner_text_i18n?.es ?? settings.banner_text ?? ''} placeholder="🚀 ¡Lanzamos algo nuevo!" />
+          <Field name="banner_text_en" label="Text (fallback) — EN" defaultValue={settings.banner_text_i18n?.en ?? ''} placeholder="🚀 We just launched something new!" />
+        </div>
+        <Field name="banner_link_url" label="Link URL (optional)" defaultValue={settings.banner_link_url} placeholder="https://..." />
+
+        {/* Image upload */}
+        <div>
+          <label className="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1.5">
+            Banner Image (optional)
+          </label>
+          {previewUrl && (
+            <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-2 border border-slate-200 dark:border-navy-600/50">
+              <Image src={previewUrl} alt="Banner preview" fill className="object-cover" />
+            </div>
+          )}
+          <input
+            ref={fileInputRef}
+            type="file"
+            name="banner_image"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="w-full text-sm text-slate-500 dark:text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-electric-500/10 file:text-electric-600 dark:file:text-electric-400 hover:file:bg-electric-500/20 transition-colors cursor-pointer"
+          />
+          {previewUrl && (
+            <button
+              type="button"
+              onClick={() => { setPreviewUrl(null); if (fileInputRef.current) fileInputRef.current.value = ''; }}
+              className="mt-1.5 text-xs text-red-500 hover:text-red-600 transition-colors"
+            >
+              Remove image
+            </button>
+          )}
+          <input type="hidden" name="banner_image_remove" value={previewUrl ? '' : '1'} />
+        </div>
       </Section>
 
       <Section title="Business State">

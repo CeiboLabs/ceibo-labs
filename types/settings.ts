@@ -9,6 +9,9 @@ export interface SiteSettings {
   banner_text: string | null;
   banner_text_i18n: I18nField | null;
   banner_link_url: string | null;
+  banner_image_url: string | null;
+  banner_title_i18n: I18nField | null;
+  banner_subtitle_i18n: I18nField | null;
   taking_clients: boolean;
   home_projects_limit: number;
   home_reviews_limit: number;
@@ -22,6 +25,9 @@ export interface SettingsSnapshot {
   banner_enabled: boolean;
   banner_text_i18n: I18nField | null;
   banner_link_url: string | null;
+  banner_image_url: string | null;
+  banner_title_i18n: I18nField | null;
+  banner_subtitle_i18n: I18nField | null;
   taking_clients: boolean;
   home_projects_limit: number;
   home_reviews_limit: number;

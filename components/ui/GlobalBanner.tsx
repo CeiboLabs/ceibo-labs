@@ -2,23 +2,29 @@
 
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import Image from 'next/image';
 
 interface Props {
-  text: string;
-  linkUrl?: string;
+  text?: string | null;
+  linkUrl?: string | null;
+  imageUrl?: string | null;
+  title?: string | null;
+  subtitle?: string | null;
+  locale?: string;
 }
 
-export function GlobalBanner({ text, linkUrl }: Props) {
+export function GlobalBanner({ text, linkUrl, imageUrl, title, subtitle, locale }: Props) {
+  const learnMore = locale === 'en' ? 'Learn more →' : 'Ver más →';
   const [visible, setVisible] = useState(false);
 
-  const storageKey = `banner_dismissed_${btoa(text).slice(0, 16)}`;
+  const content = title || text || '';
+  const storageKey = `banner_dismissed_${btoa(content).slice(0, 16)}`;
 
   useEffect(() => {
-    // Only show if user hasn't dismissed this specific banner text
-    if (!sessionStorage.getItem(storageKey)) {
+    if (content && !sessionStorage.getItem(storageKey)) {
       setVisible(true);
     }
-  }, [storageKey]);
+  }, [storageKey, content]);
 
   function dismiss() {
     sessionStorage.setItem(storageKey, '1');
@@ -28,29 +34,63 @@ export function GlobalBanner({ text, linkUrl }: Props) {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 max-w-sm animate-in slide-in-from-bottom-4 fade-in duration-300">
-      <div className="flex items-start gap-3 px-4 py-3 rounded-xl bg-white dark:bg-navy-800/95 border border-slate-200 dark:border-electric-400/30 shadow-lg dark:shadow-glow-md backdrop-blur-sm text-sm">
-        <div className="flex-1 leading-snug">
-          {linkUrl ? (
-            <a
-              href={linkUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-electric-500 dark:text-electric-300 font-medium hover:underline"
-            >
-              {text}
-            </a>
-          ) : (
-            <span className="text-slate-800 dark:text-slate-200">{text}</span>
-          )}
-        </div>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
+      onClick={dismiss}
+    >
+      <div
+        className="relative w-full max-w-lg rounded-2xl overflow-hidden bg-white dark:bg-navy-900 shadow-2xl animate-in zoom-in-95 duration-300"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
         <button
           onClick={dismiss}
-          aria-label="Dismiss banner"
-          className="flex-shrink-0 mt-0.5 p-0.5 rounded text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors"
+          aria-label="Cerrar"
+          className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-black/20 hover:bg-black/40 text-white transition-colors"
         >
-          <X size={14} />
+          <X size={16} />
         </button>
+
+        {/* Image */}
+        {imageUrl && (
+          <div className="relative w-full aspect-video">
+            <Image
+              src={imageUrl}
+              alt={title || 'Banner'}
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
+
+        {/* Content */}
+        {(title || subtitle || text) && (
+          <div className="px-6 py-6 space-y-3">
+            {title && (
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white leading-snug">
+                {title}
+              </h3>
+            )}
+            {subtitle && (
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{subtitle}</p>
+            )}
+            {text && (
+              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{text}</p>
+            )}
+            {linkUrl && (
+              <div className="pt-1">
+                <a
+                  href={linkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-5 py-2.5 rounded-xl bg-electric-500 hover:bg-electric-400 text-white text-sm font-semibold transition-colors"
+                >
+                  {learnMore}
+                </a>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
