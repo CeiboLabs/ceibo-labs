@@ -29,7 +29,7 @@ export async function generateMetadata({
     : SITE.description;
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: {
       canonical: `${SITE.url}/${locale}`,
