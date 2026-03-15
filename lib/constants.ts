@@ -21,7 +21,7 @@ export const CONTACT = {
 // ─────────────────────────────────────────────────────────────
 export const SITE = {
   name: 'Oriental Labs',
-  tagline: 'Web, AI & software products built in Uruguay.',
+  tagline: 'Software & AI Products from Uruguay',
   description:
     'Oriental Labs is a Uruguayan software & AI studio. We build web apps, AI integrations, design systems, and MVPs for startups and businesses worldwide.',
   url: 'https://orientalabs.dev',
