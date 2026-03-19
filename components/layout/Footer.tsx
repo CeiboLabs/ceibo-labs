@@ -9,7 +9,7 @@ export function Footer() {
   const { t, locale } = useTranslation();
 
   const SOCIAL_LINKS = [
-    { label: 'WhatsApp', href: `${CONTACT.whatsappUrl}?text=${encodeURIComponent(locale === 'es' ? '¡Hola Oriental Labs! Me gustaría hablar sobre un proyecto.' : 'Hi Oriental Labs! I would like to talk about a project.')}`, icon: MessageCircle },
+    { label: 'WhatsApp', href: `${CONTACT.whatsappUrl}?text=${encodeURIComponent(locale === 'es' ? '¡Hola! Vi su página y me gustaría saber más sobre sus servicios.' : 'Hi! I saw your website and would like to know more about your services.')}`, icon: MessageCircle },
     { label: 'Instagram', href: CONTACT.instagramUrl, icon: Instagram },
     { label: 'Email', href: CONTACT.emailUrl, icon: Mail },
   ];

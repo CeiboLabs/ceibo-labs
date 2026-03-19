@@ -96,7 +96,7 @@ export function Hero({ takingClients = true }: Props) {
             <Button
               variant="outline"
               size="lg"
-              href={`${CONTACT.whatsappUrl}?text=${encodeURIComponent(locale === 'es' ? '¡Hola Oriental Labs! Me gustaría hablar sobre un proyecto.' : 'Hi Oriental Labs! I would like to talk about a project.')}`}
+              href={`${CONTACT.whatsappUrl}?text=${encodeURIComponent(locale === 'es' ? '¡Hola! Vi su página y me gustaría saber más sobre sus servicios.' : 'Hi! I saw your website and would like to know more about your services.')}`}
               target="_blank"
               rel="noopener noreferrer"
             >
