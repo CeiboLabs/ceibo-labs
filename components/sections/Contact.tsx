@@ -15,7 +15,7 @@ interface CopyButtonProps {
 
 function CopyButton({ value, activeClass = 'hover:text-electric-400 hover:bg-electric-400/10' }: CopyButtonProps) {
   const { copied, copy } = useClipboard();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   return (
     <button
@@ -61,7 +61,7 @@ export function Contact() {
           {/* WhatsApp */}
           <StaggerItem>
             <motion.a
-              href={`${CONTACT.whatsappUrl}?text=Hi! I found Oriental Labs and would like to talk about a project.`}
+              href={`${CONTACT.whatsappUrl}?text=${encodeURIComponent(locale === 'es' ? '¡Hola Oriental Labs! Me gustaría hablar sobre un proyecto.' : 'Hi Oriental Labs! I would like to talk about a project.')}`}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -4, scale: 1.01 }}

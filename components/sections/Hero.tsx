@@ -20,7 +20,7 @@ interface Props {
 }
 
 export function Hero({ takingClients = true }: Props) {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -96,7 +96,7 @@ export function Hero({ takingClients = true }: Props) {
             <Button
               variant="outline"
               size="lg"
-              href={`${CONTACT.whatsappUrl}?text=Hi! I found Oriental Labs and would like to talk about a project.`}
+              href={`${CONTACT.whatsappUrl}?text=${encodeURIComponent(locale === 'es' ? '¡Hola Oriental Labs! Me gustaría hablar sobre un proyecto.' : 'Hi Oriental Labs! I would like to talk about a project.')}`}
               target="_blank"
               rel="noopener noreferrer"
             >

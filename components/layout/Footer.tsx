@@ -5,14 +5,14 @@ import { Logo } from '@/components/ui/Logo';
 import { useTranslation } from '@/lib/i18n/context';
 import { CONTACT, SITE } from '@/lib/constants';
 
-const SOCIAL_LINKS = [
-  { label: 'WhatsApp', href: CONTACT.whatsappUrl, icon: MessageCircle },
-  { label: 'Instagram', href: CONTACT.instagramUrl, icon: Instagram },
-  { label: 'Email', href: CONTACT.emailUrl, icon: Mail },
-];
-
 export function Footer() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
+
+  const SOCIAL_LINKS = [
+    { label: 'WhatsApp', href: `${CONTACT.whatsappUrl}?text=${encodeURIComponent(locale === 'es' ? '¡Hola Oriental Labs! Me gustaría hablar sobre un proyecto.' : 'Hi Oriental Labs! I would like to talk about a project.')}`, icon: MessageCircle },
+    { label: 'Instagram', href: CONTACT.instagramUrl, icon: Instagram },
+    { label: 'Email', href: CONTACT.emailUrl, icon: Mail },
+  ];
 
   const NAV_LINKS = [
     { label: t.nav.services, href: '/#services' },
