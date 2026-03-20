@@ -12,5 +12,11 @@
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "ceibolabs.dev/*",
+      "zone_name": "ceibolabs.dev"
+    }
+  ]
 }
