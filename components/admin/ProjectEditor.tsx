@@ -219,12 +219,6 @@ export function ProjectEditor({ initial }: Props) {
       : 'project.update';
     await logAuditAction({ action, entityType: 'project', entitySlug: finalSlug, metadata: { title: form.title } });
 
-    await fetch('/api/revalidate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ slug: finalSlug, type: 'project' }),
-    });
-
     setSaving(false);
     router.push('/admin/projects');
     router.refresh();
