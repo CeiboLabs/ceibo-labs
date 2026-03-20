@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition, useCallback } from 'react';
+import { useState, useTransition, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Upload, X, Trash2, Plus } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
@@ -84,6 +84,14 @@ export function ProjectEditor({ initial }: Props) {
 
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [ogTitle, setOgTitle] = useState(form.title);
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setOgTitle(langTab === 'es' ? form.title : (form.title_en || form.title));
+    }, 800);
+    return () => clearTimeout(t);
+  }, [form.title, form.title_en, langTab]);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [deleting, startDeleteTransition] = useTransition();
   const [coverUploading, setCoverUploading] = useState(false);
@@ -452,7 +460,7 @@ export function ProjectEditor({ initial }: Props) {
             </label>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`/api/og?type=project&title=${encodeURIComponent(langTab === 'es' ? form.title : (form.title_en || form.title))}&subtitle=${encodeURIComponent('Ceibo Labs')}`}
+              src={`/api/og?type=project&title=${encodeURIComponent(ogTitle)}&subtitle=${encodeURIComponent('Ceibo Labs')}`}
               alt="OG preview"
               className="w-full rounded-xl border border-navy-600/50"
               style={{ aspectRatio: '1200/630' }}

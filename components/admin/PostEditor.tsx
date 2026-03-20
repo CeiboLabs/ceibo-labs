@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition, useCallback } from 'react';
+import { useState, useTransition, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -84,6 +84,17 @@ export function PostEditor({ initial }: Props) {
   const [deleting, startDeleteTransition] = useTransition();
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [ogPreview, setOgPreview] = useState({ title: form.title, excerpt: form.excerpt });
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setOgPreview({
+        title: langTab === 'es' ? form.title : (form.title_en || form.title),
+        excerpt: langTab === 'es' ? form.excerpt : (form.excerpt_en || form.excerpt),
+      });
+    }, 800);
+    return () => clearTimeout(t);
+  }, [form.title, form.title_en, form.excerpt, form.excerpt_en, langTab]);
 
   const set = (key: keyof PostData) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -367,7 +378,7 @@ export function PostEditor({ initial }: Props) {
               </label>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`/api/og?type=blog&title=${encodeURIComponent(langTab === 'es' ? form.title : (form.title_en || form.title))}&subtitle=${encodeURIComponent(langTab === 'es' ? form.excerpt : (form.excerpt_en || form.excerpt))}`}
+                src={`/api/og?type=blog&title=${encodeURIComponent(ogPreview.title)}&subtitle=${encodeURIComponent(ogPreview.excerpt)}`}
                 alt="OG preview"
                 className="w-full rounded-xl border border-navy-600/50"
                 style={{ aspectRatio: '1200/630' }}
