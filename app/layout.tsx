@@ -83,6 +83,19 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: SITE.url,
+    },
+  ],
+};
+
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -138,6 +151,10 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning className={inter.variable}>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
