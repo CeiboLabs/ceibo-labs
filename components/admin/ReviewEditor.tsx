@@ -198,7 +198,7 @@ export function ReviewEditor({ initial, publishedProjects = [] }: Props) {
     const action = !initial?.id ? 'review.create'
       : targetStatus === 'published' ? 'review.publish'
       : 'review.update';
-    await logAuditAction({ action, entityType: 'review', metadata: { author: form.author_name } });
+    logAuditAction({ action, entityType: 'review', metadata: { author: form.author_name } });
 
     setSaving(false);
     router.push('/admin/reviews');

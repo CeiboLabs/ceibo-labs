@@ -86,13 +86,10 @@ export async function saveSettingsAction(
   if (error) return { error: error.message, ok: false };
 
   invalidateSettingsCache();
-  revalidatePath('/', 'layout');
-  revalidatePath('/admin/settings');
 
   // Log only what changed
   const diff: Record<string, { from: unknown; to: unknown }> = {};
   if (current) {
-
     for (const key of Object.keys(payload) as (keyof typeof payload)[]) {
       if (key === 'id') continue;
       const oldVal = (current as Record<string, unknown>)[key];
@@ -101,7 +98,7 @@ export async function saveSettingsAction(
     }
   }
 
-  await logAudit({
+  logAudit({
     action:     'settings.update',
     actorEmail: user.email ?? 'unknown',
     entityType: 'settings',

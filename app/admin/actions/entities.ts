@@ -34,7 +34,7 @@ export async function deletePostAction(
   const { error } = await supabase.from('posts').delete().eq('id', id);
   if (error) return { error: error.message };
 
-  await logAudit({
+  logAudit({
     action:     'post.delete',
     actorEmail,
     entityType: 'post',
@@ -75,7 +75,7 @@ export async function deleteProjectAction(
   const { error } = await supabase.from('projects').delete().eq('id', id);
   if (error) return { error: error.message };
 
-  await logAudit({
+  logAudit({
     action:     'project.delete',
     actorEmail,
     entityType: 'project',
@@ -118,7 +118,7 @@ export async function deleteReviewAction(
   const { error } = await supabase.from('reviews').delete().eq('id', id);
   if (error) return { error: error.message };
 
-  await logAudit({
+  logAudit({
     action:     'review.delete',
     actorEmail,
     entityType: 'review',

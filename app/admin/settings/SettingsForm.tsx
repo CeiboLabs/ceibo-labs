@@ -11,7 +11,7 @@ interface Props {
 
 const initialState = { error: null, ok: false };
 
-function Toggle({ name, label, defaultChecked }: { name: string; label: string; defaultChecked: boolean }) {
+function Toggle({ name, label, checked, onChange }: { name: string; label: string; checked: boolean; onChange: (v: boolean) => void }) {
   return (
     <label className="flex items-center justify-between gap-4 cursor-pointer">
       <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{label}</span>
@@ -19,7 +19,8 @@ function Toggle({ name, label, defaultChecked }: { name: string; label: string; 
         <input
           type="checkbox"
           name={name}
-          defaultChecked={defaultChecked}
+          checked={checked}
+          onChange={(e) => onChange(e.target.checked)}
           className="sr-only peer"
         />
         <div className="w-9 h-5 rounded-full bg-slate-200 dark:bg-navy-700 peer-checked:bg-electric-400 transition-colors" />
@@ -84,6 +85,9 @@ export function SettingsForm({ settings }: Props) {
   const [state, formAction, pending] = useActionState(saveSettingsAction, initialState);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(settings.banner_image_url ?? null);
+  const [maintenanceEnabled, setMaintenanceEnabled] = useState(settings.maintenance_enabled);
+  const [bannerEnabled, setBannerEnabled] = useState(settings.banner_enabled);
+  const [takingClients, setTakingClients] = useState(settings.taking_clients);
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -104,7 +108,7 @@ export function SettingsForm({ settings }: Props) {
       )}
 
       <Section title="Maintenance Mode">
-        <Toggle name="maintenance_enabled" label="Enable maintenance mode" defaultChecked={settings.maintenance_enabled} />
+        <Toggle name="maintenance_enabled" label="Enable maintenance mode" checked={maintenanceEnabled} onChange={setMaintenanceEnabled} />
         <div className="grid sm:grid-cols-2 gap-3">
           <Textarea
             name="maintenance_message_es"
@@ -136,7 +140,7 @@ export function SettingsForm({ settings }: Props) {
       </Section>
 
       <Section title="Global Banner (Modal)">
-        <Toggle name="banner_enabled" label="Show banner on site" defaultChecked={settings.banner_enabled} />
+        <Toggle name="banner_enabled" label="Show banner on site" checked={bannerEnabled} onChange={setBannerEnabled} />
         <div className="grid sm:grid-cols-2 gap-3">
           <Field name="banner_title_es" label="Title — ES" defaultValue={settings.banner_title_i18n?.es ?? ''} placeholder="¡Nuevo proyecto disponible!" />
           <Field name="banner_title_en" label="Title — EN" defaultValue={settings.banner_title_i18n?.en ?? ''} placeholder="New project available!" />
@@ -183,7 +187,7 @@ export function SettingsForm({ settings }: Props) {
       </Section>
 
       <Section title="Business State">
-        <Toggle name="taking_clients" label="Currently taking new clients" defaultChecked={settings.taking_clients} />
+        <Toggle name="taking_clients" label="Currently taking new clients" checked={takingClients} onChange={setTakingClients} />
         <p className="text-xs text-slate-500 dark:text-slate-400">
           When off, the hero CTA changes to &ldquo;Join the waiting list&rdquo;.
         </p>

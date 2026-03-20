@@ -19,7 +19,7 @@ export async function clearLogsAction(): Promise<{ error: string | null }> {
   if (error) return { error: error.message };
 
   // Insert a single marker entry (will be the only row after clear)
-  await logAudit({
+  logAudit({
     action:     'logs.clear',
     actorEmail: user.email ?? 'unknown',
     entityType: 'logs',
