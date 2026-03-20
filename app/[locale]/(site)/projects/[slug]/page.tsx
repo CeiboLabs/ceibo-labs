@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
@@ -5,13 +6,15 @@ import { ProjectPageContent } from './ProjectPageContent';
 import { SITE } from '@/lib/constants';
 import { pickI18n } from '@/lib/i18n-content';
 import {
-  getPublishedProjectBySlug,
+  getPublishedProjectBySlug as _getPublishedProjectBySlug,
   getProjectBySlugAdmin,
   getPublishedProjects,
   getPublishedProjectSlugs,
 } from '@/lib/projects';
 import { createClient } from '@/lib/supabase/server';
 import type { Locale } from '@/lib/i18n/translations';
+
+const getPublishedProjectBySlug = cache(_getPublishedProjectBySlug);
 
 export const revalidate = 60;
 
@@ -92,9 +95,11 @@ export default async function ProjectPage({
     return <ProjectPageContent project={project} allProjects={await getPublishedProjects()} locale={locale as Locale} isPreview />;
   }
 
-  const project = await getPublishedProjectBySlug(slug);
+  const [project, allProjects] = await Promise.all([
+    getPublishedProjectBySlug(slug),
+    getPublishedProjects(),
+  ]);
   if (!project) notFound();
-  const allProjects = await getPublishedProjects();
 
   const title = pickI18n(project.title_i18n, locale as Locale) || project.title || project.slug;
   const breadcrumbJsonLd = {

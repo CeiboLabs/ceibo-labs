@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
@@ -21,7 +22,7 @@ interface Post {
   content_i18n: Record<string, string> | null;
 }
 
-async function getPost(slug: string, isPreview = false): Promise<Post | null> {
+const getPost = cache(async function getPost(slug: string, isPreview = false): Promise<Post | null> {
   const supabase = await createClient();
   const { data } = await supabase
     .from('posts')
@@ -32,7 +33,7 @@ async function getPost(slug: string, isPreview = false): Promise<Post | null> {
   if (!data) return null;
   if (!isPreview && data.status !== 'published') return null;
   return data as Post;
-}
+});
 
 async function getRelatedPosts(currentId: string, tags: string[]): Promise<Post[]> {
   if (tags.length === 0) return [];
