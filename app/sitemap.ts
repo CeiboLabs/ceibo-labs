@@ -9,20 +9,28 @@ const altLanguages = (path: string) =>
 
 export const revalidate = 3600; // revalidate hourly
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const supabase = createStaticClient();
+async function getDynamicRoutes() {
+  try {
+    const supabase = createStaticClient();
+    const [{ data: posts }, { data: projects }] = await Promise.all([
+      supabase
+        .from('posts')
+        .select('slug, updated_at')
+        .eq('status', 'published')
+        .order('updated_at', { ascending: false }),
+      supabase
+        .from('projects')
+        .select('slug, updated_at')
+        .eq('status', 'published'),
+    ]);
+    return { posts: posts ?? [], projects: projects ?? [] };
+  } catch {
+    return { posts: [], projects: [] };
+  }
+}
 
-  const [{ data: posts }, { data: projects }] = await Promise.all([
-    supabase
-      .from('posts')
-      .select('slug, updated_at')
-      .eq('status', 'published')
-      .order('updated_at', { ascending: false }),
-    supabase
-      .from('projects')
-      .select('slug, updated_at')
-      .eq('status', 'published'),
-  ]);
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { posts, projects } = await getDynamicRoutes();
 
   const staticRoutes: MetadataRoute.Sitemap = LOCALES.flatMap((locale) => [
     {

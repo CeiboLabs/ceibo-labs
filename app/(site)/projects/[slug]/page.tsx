@@ -14,8 +14,12 @@ const ALLOWED_EMAILS = [
 ].filter(Boolean) as string[];
 
 export async function generateStaticParams() {
-  const projects = await getPublishedProjectSlugs();
-  return projects.map((p) => ({ slug: p.slug }));
+  try {
+    const projects = await getPublishedProjectSlugs();
+    return projects.map((p) => ({ slug: p.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({

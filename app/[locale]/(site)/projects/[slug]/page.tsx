@@ -18,11 +18,15 @@ export const revalidate = 60;
 const ALLOWED_EMAILS = [process.env.BRUNO_EMAIL, process.env.EMILIANO_EMAIL].filter(Boolean) as string[];
 
 export async function generateStaticParams() {
-  const [projects] = await Promise.all([getPublishedProjectSlugs()]);
-  const locales = ['es', 'en'];
-  return locales.flatMap((locale) =>
-    projects.map((p) => ({ locale, slug: p.slug }))
-  );
+  try {
+    const projects = await getPublishedProjectSlugs();
+    const locales = ['es', 'en'];
+    return locales.flatMap((locale) =>
+      projects.map((p) => ({ locale, slug: p.slug }))
+    );
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({
