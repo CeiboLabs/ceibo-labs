@@ -189,7 +189,6 @@ export function PostEditor({ initial }: Props) {
 
     setSaving(false);
     router.push('/admin');
-    router.refresh();
   }
 
   const activeTitle = langTab === 'es' ? form.title : form.title_en;

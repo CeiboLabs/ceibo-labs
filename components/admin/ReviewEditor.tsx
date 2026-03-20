@@ -202,7 +202,6 @@ export function ReviewEditor({ initial, publishedProjects = [] }: Props) {
 
     setSaving(false);
     router.push('/admin/reviews');
-    router.refresh();
   }
 
   function handleDelete() {

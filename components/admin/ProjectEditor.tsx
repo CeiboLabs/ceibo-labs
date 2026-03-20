@@ -221,7 +221,6 @@ export function ProjectEditor({ initial }: Props) {
 
     setSaving(false);
     router.push('/admin/projects');
-    router.refresh();
   }
 
   function handleDelete() {
