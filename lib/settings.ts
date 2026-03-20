@@ -29,7 +29,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
 };
 
 // ─── In-memory cache ─────────────────────────────────────────────────
-const CACHE_TTL_MS = 300_000; // 5 minutes
+const CACHE_TTL_MS = 15_000; // 15 seconds
 
 let _cache: { data: SiteSettings; timestamp: number } | null = null;
 
