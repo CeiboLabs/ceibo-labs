@@ -85,6 +85,8 @@ export function SettingsForm({ settings }: Props) {
   const [state, formAction, pending] = useActionState(saveSettingsAction, initialState);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(settings.banner_image_url ?? null);
+  // Tracks the persisted Supabase URL (not the local blob preview) for the hidden form field
+  const [currentImageUrl, setCurrentImageUrl] = useState(settings.banner_image_url ?? '');
   const [maintenanceEnabled, setMaintenanceEnabled] = useState(settings.maintenance_enabled);
   const [bannerEnabled, setBannerEnabled] = useState(settings.banner_enabled);
   const [takingClients, setTakingClients] = useState(settings.taking_clients);
@@ -176,13 +178,14 @@ export function SettingsForm({ settings }: Props) {
           {previewUrl && (
             <button
               type="button"
-              onClick={() => { setPreviewUrl(null); if (fileInputRef.current) fileInputRef.current.value = ''; }}
+              onClick={() => { setPreviewUrl(null); setCurrentImageUrl(''); if (fileInputRef.current) fileInputRef.current.value = ''; }}
               className="mt-1.5 text-xs text-red-500 hover:text-red-600 transition-colors"
             >
               Remove image
             </button>
           )}
           <input type="hidden" name="banner_image_remove" value={previewUrl ? '' : '1'} />
+          <input type="hidden" name="banner_image_url_current" value={currentImageUrl} />
         </div>
       </Section>
 

@@ -1,6 +1,5 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import { invalidateSettingsCache } from '@/lib/settings';
 import { logAudit } from '@/lib/audit';
@@ -11,11 +10,12 @@ export async function saveSettingsAction(
 ): Promise<{ error: string | null; ok: boolean }> {
   const supabase = await createClient();
 
+  // getSession reads from cookie without a network call (middleware already verified the JWT)
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: { session },
+  } = await supabase.auth.getSession();
 
-  if (!user) return { error: 'Not authenticated.', ok: false };
+  if (!session) return { error: 'Not authenticated.', ok: false };
 
   const maintenanceMsgEs = (formData.get('maintenance_message_es') as string) || '';
   const maintenanceMsgEn = (formData.get('maintenance_message_en') as string) || '';
@@ -28,30 +28,21 @@ export async function saveSettingsAction(
   const bannerImageFile = formData.get('banner_image') as File | null;
   const bannerImageRemove = formData.get('banner_image_remove') === '1';
 
-  // Fetch current settings to get existing image URL
-  const { data: current } = await supabase
-    .from('site_settings')
-    .select('*')
-    .eq('id', 1)
-    .single();
-
-  let bannerImageUrl: string | null = (current as Record<string, unknown>)?.banner_image_url as string | null ?? null;
+  // Current image URL comes from the form (hidden field) — avoids an extra SELECT query
+  let bannerImageUrl: string | null = (formData.get('banner_image_url_current') as string) || null;
 
   // Handle image upload/removal
   if (bannerImageRemove) {
-    // Delete old image from storage if exists
     if (bannerImageUrl) {
       const oldPath = bannerImageUrl.split('/banner-images/')[1];
-      if (oldPath) await supabase.storage.from('banner-images').remove([oldPath]);
+      if (oldPath) supabase.storage.from('banner-images').remove([oldPath]);
     }
     bannerImageUrl = null;
   } else if (bannerImageFile && bannerImageFile.size > 0) {
-    // Delete old image
     if (bannerImageUrl) {
       const oldPath = bannerImageUrl.split('/banner-images/')[1];
-      if (oldPath) await supabase.storage.from('banner-images').remove([oldPath]);
+      if (oldPath) supabase.storage.from('banner-images').remove([oldPath]);
     }
-    // Upload new image
     const ext = bannerImageFile.name.split('.').pop();
     const fileName = `banner-${Date.now()}.${ext}`;
     const { error: uploadError } = await supabase.storage
@@ -87,22 +78,11 @@ export async function saveSettingsAction(
 
   invalidateSettingsCache();
 
-  // Log only what changed
-  const diff: Record<string, { from: unknown; to: unknown }> = {};
-  if (current) {
-    for (const key of Object.keys(payload) as (keyof typeof payload)[]) {
-      if (key === 'id') continue;
-      const oldVal = (current as Record<string, unknown>)[key];
-      const newVal = payload[key];
-      if (oldVal !== newVal) diff[key] = { from: oldVal, to: newVal };
-    }
-  }
-
   logAudit({
     action:     'settings.update',
-    actorEmail: user.email ?? 'unknown',
+    actorEmail: session.user.email ?? 'unknown',
     entityType: 'settings',
-    metadata:   Object.keys(diff).length ? diff : null,
+    metadata:   null,
   });
 
   return { error: null, ok: true };
