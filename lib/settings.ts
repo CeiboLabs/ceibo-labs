@@ -43,14 +43,15 @@ function createClient() {
 // ─── Public API ──────────────────────────────────────────────────────
 
 /**
- * Returns site settings. Reads from in-memory cache if fresh (<60s),
+ * Returns site settings. Reads from in-memory cache if fresh,
  * otherwise fetches from Supabase and refreshes the cache.
+ * Pass fresh=true to bypass cache (e.g. on the maintenance page).
  * Always returns a valid object — falls back to DEFAULT_SETTINGS on error.
  */
-export async function getSiteSettings(): Promise<SiteSettings> {
+export async function getSiteSettings(fresh = false): Promise<SiteSettings> {
   const now = Date.now();
 
-  if (_cache && now - _cache.timestamp < CACHE_TTL_MS) {
+  if (!fresh && _cache && now - _cache.timestamp < CACHE_TTL_MS) {
     return _cache.data;
   }
 

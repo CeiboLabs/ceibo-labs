@@ -90,8 +90,9 @@ export async function middleware(request: NextRequest) {
 
   // ── 4. Maintenance mode ────────────────────────────────────────────────────
   try {
-    const settings = await getSiteSettings();
     const isMaintenancePath = pathname === `/${locale}/maintenance`;
+    // Bypass cache on the maintenance page so turning off maintenance takes effect immediately
+    const settings = await getSiteSettings(isMaintenancePath);
 
     if (isMaintenancePath) {
       // If maintenance is OFF → send to homepage
