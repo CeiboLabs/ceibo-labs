@@ -44,7 +44,7 @@ export async function generateMetadata({
       url: `${SITE.url}/${locale}`,
       title,
       description,
-      images: ['/og-image.jpg'],
+      images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     },
   };
 }
