@@ -2,7 +2,7 @@
 
 import { useState, useTransition, useCallback, useEffect } from 'react';
 import Link from 'next/link';
-import { PenLine, Trash2, Eye, EyeOff, ExternalLink, RefreshCw } from 'lucide-react';
+import { PenLine, Trash2, Eye, EyeOff, ExternalLink } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 import { deletePostAction } from '@/app/admin/actions/entities';
@@ -40,7 +40,6 @@ function StatusBadge({ status }: { status: string }) {
 export function AdminDashboard() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
-  const [, startTransition] = useTransition();
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
   const [deleting, startDeleteTransition] = useTransition();
   const [draftTarget, setDraftTarget] = useState<Post | null>(null);
@@ -142,13 +141,6 @@ export function AdminDashboard() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => { setLoading(true); startTransition(() => { fetchPosts(); }); }}
-            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-navy-700/60 transition-colors"
-            title="Refresh"
-          >
-            <RefreshCw size={14} />
-          </button>
           <Link
             href="/admin/new"
             className="flex items-center gap-2 px-4 py-2 rounded-xl bg-electric-400 hover:bg-electric-300 text-navy-950 font-semibold text-sm transition-colors"
