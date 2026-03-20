@@ -185,7 +185,7 @@ export function PostEditor({ initial }: Props) {
     const action = !initial?.id ? 'post.create'
       : targetStatus === 'published' ? 'post.publish'
       : 'post.update';
-    await logAuditAction({ action, entityType: 'post', entitySlug: finalSlug, metadata: { title: form.title } });
+    logAuditAction({ action, entityType: 'post', entitySlug: finalSlug, metadata: { title: form.title } });
 
     setSaving(false);
     router.push('/admin');

@@ -217,7 +217,7 @@ export function ProjectEditor({ initial }: Props) {
     const action = !initial?.id ? 'project.create'
       : targetStatus === 'published' ? 'project.publish'
       : 'project.update';
-    await logAuditAction({ action, entityType: 'project', entitySlug: finalSlug, metadata: { title: form.title } });
+    logAuditAction({ action, entityType: 'project', entitySlug: finalSlug, metadata: { title: form.title } });
 
     setSaving(false);
     router.push('/admin/projects');
