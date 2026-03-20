@@ -73,8 +73,6 @@ export function Services() {
             </div>
 
             <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-electric-400/20 via-electric-400/50 to-electric-400/20" />
-
               {processSteps.map((step, idx) => (
                 <motion.div
                   key={step.step}
@@ -98,8 +96,9 @@ export function Services() {
                   </p>
 
                   {idx < processSteps.length - 1 && (
-                    <div className="hidden lg:flex absolute top-8 -right-3 z-20">
-                      <ArrowRight size={14} className="text-electric-400/50" />
+                    <div className="hidden lg:flex items-center absolute top-8 -translate-y-1/2 left-16 -right-6 z-20">
+                      <div className="flex-1 h-px bg-gradient-to-r from-electric-400/40 to-electric-400/20" />
+                      <ArrowRight size={14} className="text-electric-400/50 flex-shrink-0" />
                     </div>
                   )}
                 </motion.div>
