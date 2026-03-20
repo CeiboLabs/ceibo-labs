@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useCallback, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { PenLine, Trash2, Eye, EyeOff, ExternalLink } from 'lucide-react';
+import { PenLine, Trash2, Eye, EyeOff, ExternalLink, RefreshCw } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 import { deletePostAction } from '@/app/admin/actions/entities';
@@ -38,18 +37,30 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
-export function AdminDashboard({ initialPosts }: { initialPosts: Post[] }) {
-  const [posts, setPosts] = useState(initialPosts);
+export function AdminDashboard() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
   const [, startTransition] = useTransition();
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
   const [deleting, startDeleteTransition] = useTransition();
   const [draftTarget, setDraftTarget] = useState<Post | null>(null);
   const [drafting, startDraftTransition] = useTransition();
-  const router = useRouter();
-  const supabase = createClient();
+
+  const fetchPosts = useCallback(async () => {
+    const supabase = createClient();
+    const { data } = await supabase
+      .from('posts')
+      .select('id, slug, status, published_at, updated_at, title_i18n')
+      .order('updated_at', { ascending: false });
+    setPosts(data ?? []);
+    setLoading(false);
+  }, []);
+
+  useEffect(() => { fetchPosts(); }, [fetchPosts]);
 
   async function toggleStatus(post: Post) {
     const newStatus = post.status === 'published' ? 'draft' : 'published';
+    const supabase = createClient();
     const { error } = await supabase
       .from('posts')
       .update({
@@ -66,7 +77,6 @@ export function AdminDashboard({ initialPosts }: { initialPosts: Post[] }) {
             : p
         )
       );
-      startTransition(() => router.refresh());
     }
   }
 
@@ -84,7 +94,6 @@ export function AdminDashboard({ initialPosts }: { initialPosts: Post[] }) {
       if (!error) {
         setPosts((prev) => prev.filter((p) => p.id !== id));
         setDeleteTarget(null);
-        router.refresh();
       }
     });
   }
@@ -129,19 +138,39 @@ export function AdminDashboard({ initialPosts }: { initialPosts: Post[] }) {
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Posts</h1>
           <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
-            {posts.length} post{posts.length !== 1 ? 's' : ''}
+            {loading ? 'Loading…' : `${posts.length} post${posts.length !== 1 ? 's' : ''}`}
           </p>
         </div>
-        <Link
-          href="/admin/new"
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-electric-400 hover:bg-electric-300 text-navy-950 font-semibold text-sm transition-colors"
-        >
-          <PenLine size={14} />
-          New post
-        </Link>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => { setLoading(true); startTransition(() => { fetchPosts(); }); }}
+            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-navy-700/60 transition-colors"
+            title="Refresh"
+          >
+            <RefreshCw size={14} />
+          </button>
+          <Link
+            href="/admin/new"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-electric-400 hover:bg-electric-300 text-navy-950 font-semibold text-sm transition-colors"
+          >
+            <PenLine size={14} />
+            New post
+          </Link>
+        </div>
       </div>
 
-      {posts.length === 0 ? (
+      {loading ? (
+        <div className="rounded-2xl border border-slate-200 dark:border-navy-700/40 overflow-hidden">
+          <div className="divide-y divide-slate-200 dark:divide-navy-700/30 bg-white dark:bg-transparent">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="px-5 py-4 animate-pulse">
+                <div className="h-4 bg-slate-200 dark:bg-navy-700/60 rounded w-48 mb-2" />
+                <div className="h-3 bg-slate-100 dark:bg-navy-700/40 rounded w-32" />
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : posts.length === 0 ? (
         <div className="text-center py-20 text-slate-500">
           No posts yet.{' '}
           <Link href="/admin/new" className="text-electric-400 hover:underline">Create one</Link>.
