@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
 # Block AI bots
 User-agent: GPTBot
