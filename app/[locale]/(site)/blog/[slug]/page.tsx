@@ -1,13 +1,26 @@
 import { cache } from 'react';
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
-import { createClient } from '@/lib/supabase/server';
+import { createClient, createStaticClient } from '@/lib/supabase/server';
 import { SITE } from '@/lib/constants';
 import { pickI18n, pickI18nMedia } from '@/lib/i18n-content';
 import { BlogPostContent } from './BlogPostContent';
 import type { Locale } from '@/lib/i18n/translations';
 
+export const revalidate = 60;
+
 const ALLOWED_EMAILS = [process.env.BRUNO_EMAIL, process.env.EMILIANO_EMAIL].filter(Boolean) as string[];
+
+export async function generateStaticParams() {
+  try {
+    const supabase = createStaticClient();
+    const { data } = await supabase.from('posts').select('slug').eq('status', 'published');
+    const locales = ['es', 'en'];
+    return locales.flatMap((locale) => (data ?? []).map((p) => ({ locale, slug: p.slug })));
+  } catch {
+    return [];
+  }
+}
 
 interface Post {
   id: string;

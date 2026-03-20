@@ -187,6 +187,12 @@ export function PostEditor({ initial }: Props) {
       : 'post.update';
     await logAuditAction({ action, entityType: 'post', entitySlug: finalSlug, metadata: { title: form.title } });
 
+    await fetch('/api/revalidate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: finalSlug, type: 'blog' }),
+    });
+
     setSaving(false);
     router.push('/admin');
     router.refresh();
