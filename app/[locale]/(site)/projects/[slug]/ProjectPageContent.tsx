@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ExternalLink, Github, MessageCircle, ChevronLeft, ChevronRight, Home } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { ExternalLink, Github, MessageCircle, ChevronLeft, ChevronRight, Home, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { useTranslation } from '@/lib/i18n/context';
@@ -24,6 +25,23 @@ interface Props {
 
 export function ProjectPageContent({ project, allProjects, locale, isPreview }: Props) {
   const { t } = useTranslation();
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const gallery = project.gallery.slice(0, 4);
+
+  const closeLightbox = useCallback(() => setLightbox(null), []);
+  const prevImg = useCallback(() => setLightbox((i) => (i !== null && i > 0 ? i - 1 : i)), []);
+  const nextImg = useCallback(() => setLightbox((i) => (i !== null && i < gallery.length - 1 ? i + 1 : i)), [gallery.length]);
+
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImg();
+      if (e.key === 'ArrowRight') nextImg();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightbox, closeLightbox, prevImg, nextImg]);
 
   const title = pickI18n(project.title_i18n, locale) || project.title || project.slug;
   const shortDesc = pickI18n(project.short_description_i18n, locale) || project.short_description || '';
@@ -132,23 +150,81 @@ export function ProjectPageContent({ project, allProjects, locale, isPreview }: 
             </section>
           )}
 
-          {project.gallery.length > 0 && (
+          {gallery.length > 0 && (
             <section>
               <h2 className="text-xl font-semibold text-white mb-4">Gallery</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {project.gallery.slice(0, 4).map((item, i) => (
-                  <div key={i} className="relative aspect-[16/9] rounded-xl overflow-hidden bg-navy-900">
+                {gallery.map((item, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setLightbox(i)}
+                    className="relative aspect-[16/9] rounded-xl overflow-hidden bg-navy-900 cursor-zoom-in group"
+                  >
                     <Image
                       src={item.src}
                       alt={item.alt || `${title} screenshot ${i + 1}`}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 432px"
                     />
-                  </div>
+                  </button>
                 ))}
               </div>
             </section>
+          )}
+
+          {/* Lightbox */}
+          {lightbox !== null && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+              onClick={closeLightbox}
+            >
+              <button
+                type="button"
+                onClick={closeLightbox}
+                className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
+              >
+                <X size={28} />
+              </button>
+
+              {lightbox > 0 && (
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); prevImg(); }}
+                  className="absolute left-4 text-white/70 hover:text-white transition-colors"
+                >
+                  <ChevronLeft size={36} />
+                </button>
+              )}
+
+              <div
+                className="relative w-full max-w-4xl aspect-[16/9] rounded-xl overflow-hidden"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Image
+                  src={gallery[lightbox].src}
+                  alt={gallery[lightbox].alt || `${title} screenshot ${lightbox + 1}`}
+                  fill
+                  className="object-contain"
+                  sizes="100vw"
+                />
+              </div>
+
+              {lightbox < gallery.length - 1 && (
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); nextImg(); }}
+                  className="absolute right-4 text-white/70 hover:text-white transition-colors"
+                >
+                  <ChevronRight size={36} />
+                </button>
+              )}
+
+              <span className="absolute bottom-4 text-white/50 text-sm">
+                {lightbox + 1} / {gallery.length}
+              </span>
+            </div>
           )}
 
           <section className="flex flex-wrap items-center gap-3 pt-4 border-t border-navy-700/50">

@@ -4,13 +4,13 @@ import { BlogIndex } from './BlogIndex';
 
 export const metadata: Metadata = {
   title: 'Blog',
-  description: 'Thoughts, process, and lessons from building real software at Oriental Labs.',
+  description: 'Thoughts, process, and lessons from building real software at Ceibo Labs.',
   openGraph: {
     title: `Blog | ${SITE.name}`,
-    description: 'Thoughts, process, and lessons from building real software at Oriental Labs.',
+    description: 'Thoughts, process, and lessons from building real software at Ceibo Labs.',
     images: [
       {
-        url: `/api/og?type=blog&title=Blog&subtitle=Thoughts+from+Oriental+Labs`,
+        url: `/api/og?type=blog&title=Blog&subtitle=Thoughts+from+Ceibo+Labs`,
         width: 1200,
         height: 630,
       },

@@ -1,5 +1,5 @@
 -- ─────────────────────────────────────────────────────────────────────
--- Oriental Labs — Supabase Schema
+-- Ceibo Labs — Supabase Schema
 -- Run this in the SQL editor at https://app.supabase.com/project/_/sql
 -- ─────────────────────────────────────────────────────────────────────
 
@@ -78,8 +78,8 @@ insert into posts (title, slug, excerpt, content, tags, status, published_at) va
 (
   'Building a modern portfolio studio site with Next.js',
   'building-portfolio-studio-nextjs',
-  'How we designed and built the Oriental Labs website — from tech choices to deployment.',
-  E'# Building a modern portfolio studio site with Next.js\n\nAt Oriental Labs, we practice what we preach. When it was time to build our own studio site, we treated it like any client project: scoped requirements, chose a deliberate stack, and shipped.\n\n## Why Next.js?\n\nNext.js 15 with the App Router gave us everything we needed: static generation for fast page loads, server components for metadata and SEO, and seamless Vercel deployment.\n\n## Design philosophy\n\nWe kept the palette simple — a deep navy background, electric blue accents, and clean white type. Inspired by Linear, Vercel, and Stripe. No gradients for the sake of it, no hero images that slow things down.\n\n## Framer Motion for subtle animation\n\nWe used `framer-motion` sparingly — viewport-triggered fade-ins and staggered card entrances. The goal was *felt* rather than *seen*.\n\n## Internationalization without a library\n\nThe site supports Spanish and English, auto-detected from `navigator.language`. We wrote a tiny context-based i18n system (~60 lines) instead of pulling in a 50kb library.\n\n## Deployment\n\nVercel. Zero config. Done.',
+  'How we designed and built the Ceibo Labs website — from tech choices to deployment.',
+  E'# Building a modern portfolio studio site with Next.js\n\nAt Ceibo Labs, we practice what we preach. When it was time to build our own studio site, we treated it like any client project: scoped requirements, chose a deliberate stack, and shipped.\n\n## Why Next.js?\n\nNext.js 15 with the App Router gave us everything we needed: static generation for fast page loads, server components for metadata and SEO, and seamless Vercel deployment.\n\n## Design philosophy\n\nWe kept the palette simple — a deep navy background, electric blue accents, and clean white type. Inspired by Linear, Vercel, and Stripe. No gradients for the sake of it, no hero images that slow things down.\n\n## Framer Motion for subtle animation\n\nWe used `framer-motion` sparingly — viewport-triggered fade-ins and staggered card entrances. The goal was *felt* rather than *seen*.\n\n## Internationalization without a library\n\nThe site supports Spanish and English, auto-detected from `navigator.language`. We wrote a tiny context-based i18n system (~60 lines) instead of pulling in a 50kb library.\n\n## Deployment\n\nVercel. Zero config. Done.',
   ARRAY['Next.js', 'Design', 'Case Study'],
   'published',
   now() - interval '14 days'
@@ -103,10 +103,10 @@ insert into posts (title, slug, excerpt, content, tags, status, published_at) va
   now() - interval '3 days'
 ),
 (
-  'From idea to MVP: our workflow at Oriental Labs',
-  'from-idea-to-mvp-oriental-labs',
+  'From idea to MVP: our workflow at Ceibo Labs',
+  'from-idea-to-mvp-ceibo-labs',
   'How we take a client from napkin sketch to a shipped product in 2–4 weeks.',
-  E'# From idea to MVP: our workflow at Oriental Labs\n\nWe ship fast without cutting corners. Here''s exactly how.\n\n## Week 0: Discovery (2–3 days)\n\n- 1-hour kick-off call: goals, users, constraints\n- Competitive audit\n- Draft a one-page scope doc with the client\n- Agree on a definition of "done"\n\n## Week 1: Design + Architecture\n\n- Figma wireframes (lo-fi first, hi-fi for key screens)\n- Tech stack decision\n- Database schema draft\n- Set up repo, CI, staging environment\n\n## Week 2–3: Build\n\n- Feature branches, daily async updates to the client\n- We ship to staging after every significant feature\n- Client reviews on staging — feedback is immediate\n\n## Week 4: Polish + Launch\n\n- Responsive QA on real devices\n- Lighthouse audit (we target 95+)\n- Security review (OWASP Top 10)\n- DNS cutover and production deploy\n- 30-day post-launch support window\n\n## The secret\n\nScope discipline. We say no to scope creep firmly and kindly. The MVP is the version that validates the idea — everything else comes in v2.',
+  E'# From idea to MVP: our workflow at Ceibo Labs\n\nWe ship fast without cutting corners. Here''s exactly how.\n\n## Week 0: Discovery (2–3 days)\n\n- 1-hour kick-off call: goals, users, constraints\n- Competitive audit\n- Draft a one-page scope doc with the client\n- Agree on a definition of "done"\n\n## Week 1: Design + Architecture\n\n- Figma wireframes (lo-fi first, hi-fi for key screens)\n- Tech stack decision\n- Database schema draft\n- Set up repo, CI, staging environment\n\n## Week 2–3: Build\n\n- Feature branches, daily async updates to the client\n- We ship to staging after every significant feature\n- Client reviews on staging — feedback is immediate\n\n## Week 4: Polish + Launch\n\n- Responsive QA on real devices\n- Lighthouse audit (we target 95+)\n- Security review (OWASP Top 10)\n- DNS cutover and production deploy\n- 30-day post-launch support window\n\n## The secret\n\nScope discipline. We say no to scope creep firmly and kindly. The MVP is the version that validates the idea — everything else comes in v2.',
   ARRAY['Process', 'MVP', 'Workflow'],
   'published',
   now() - interval '1 day'

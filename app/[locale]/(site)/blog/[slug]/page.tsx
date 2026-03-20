@@ -116,7 +116,7 @@ export default async function BlogPostPage({
     dateModified: post.published_at ?? undefined,
     publisher: {
       '@type': 'Organization',
-      name: 'Oriental Labs',
+      name: 'Ceibo Labs',
       url: SITE.url,
     },
     mainEntityOfPage: {

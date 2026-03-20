@@ -119,6 +119,20 @@ export function SettingsForm({ settings }: Props) {
             placeholder="We're doing some upgrades. Back soon."
           />
         </div>
+        <div className="flex items-center justify-between pt-1">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Admin sessions bypass maintenance mode.{' '}
+            <span className="text-slate-400 dark:text-slate-500">Use incognito to test the visitor experience.</span>
+          </p>
+          <a
+            href="/es/maintenance"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-shrink-0 ml-4 text-xs font-medium text-electric-500 dark:text-electric-400 hover:underline"
+          >
+            Preview page ↗
+          </a>
+        </div>
       </Section>
 
       <Section title="Global Banner (Modal)">

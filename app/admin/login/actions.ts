@@ -38,7 +38,7 @@ export async function loginAction(
 
   // Set admin bypass cookie — allows passing maintenance mode redirects
   const cookieStore = await cookies();
-  cookieStore.set('ol_admin', '1', {
+  cookieStore.set('cl_admin', '1', {
     httpOnly: true,
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production',

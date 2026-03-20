@@ -259,7 +259,7 @@ export function ReviewEditor({ initial, publishedProjects = [] }: Props) {
             value={langTab === 'es' ? form.quote : form.quote_en}
             onChange={set(langTab === 'es' ? 'quote' : 'quote_en')}
             rows={4}
-            placeholder={langTab === 'es' ? 'Oriental Labs entregó nuestro MVP a tiempo...' : 'Oriental Labs delivered our MVP in record time...'}
+            placeholder={langTab === 'es' ? 'Ceibo Labs entregó nuestro MVP a tiempo...' : 'Ceibo Labs delivered our MVP in record time...'}
             className={cn(inputClass, 'resize-y')}
           />
         </div>

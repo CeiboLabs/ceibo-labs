@@ -9,7 +9,7 @@ export async function logoutAction() {
   await supabase.auth.signOut();
 
   const cookieStore = await cookies();
-  cookieStore.delete('ol_admin');
+  cookieStore.delete('cl_admin');
 
   redirect('/admin/login');
 }

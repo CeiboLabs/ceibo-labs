@@ -1,5 +1,5 @@
 -- ─────────────────────────────────────────────────────────────────────
--- Oriental Labs — Projects
+-- Ceibo Labs — Projects
 -- Run this in the SQL editor at https://app.supabase.com/project/_/sql
 -- ─────────────────────────────────────────────────────────────────────
 

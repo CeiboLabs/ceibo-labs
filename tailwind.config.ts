@@ -10,20 +10,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Dark background palette (replaces navy)
         navy: {
-          950: '#020915',
-          900: '#030d1c',
-          800: '#061326',
-          700: '#0b1e38',
-          600: '#122843',
-          500: '#1a3350',
+          950: '#000000',
+          900: '#0A0A0A',
+          800: '#111111',
+          700: '#1A1A1A',
+          600: '#242424',
+          500: '#333333',
         },
+        // Accent palette (replaces electric/cyan)
         electric: {
-          300: '#7ee4fb',
-          400: '#38d1f8',
-          500: '#0eb9ea',
-          600: '#0294c8',
+          300: '#A7E6C7',
+          400: '#7ED9B6',
+          500: '#3FAF7A',
+          600: '#2FA97F',
         },
+        // Additional brand colors
+        'off-white': '#F5F7F6',
+        'ceibo-red': '#E63946',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
@@ -31,15 +36,15 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'dot-pattern':
-          'radial-gradient(circle, rgba(56,209,248,0.10) 1px, transparent 1px)',
+          'radial-gradient(circle, rgba(126,217,182,0.10) 1px, transparent 1px)',
       },
       backgroundSize: {
         'dot-30': '30px 30px',
       },
       boxShadow: {
-        glow: '0 0 30px rgba(56, 209, 248, 0.12)',
-        'glow-md': '0 0 50px rgba(56, 209, 248, 0.18)',
-        electric: '0 4px 24px rgba(56, 209, 248, 0.22)',
+        glow: '0 0 30px rgba(126, 217, 182, 0.12)',
+        'glow-md': '0 0 50px rgba(126, 217, 182, 0.18)',
+        electric: '0 4px 24px rgba(126, 217, 182, 0.22)',
       },
       animation: {
         float: 'float 7s ease-in-out infinite',

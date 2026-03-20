@@ -51,7 +51,7 @@ export const translations = {
       storyEyebrow: 'Who we are',
       storyTitle: 'A studio that ships.',
       storyP1:
-        "Oriental Labs started with a simple idea: build real things that people use. Not prototypes that sit in a drawer, but products that launch, grow, and make a difference.",
+        "Ceibo Labs started with a simple idea: build real things that people use. Not prototypes that sit in a drawer, but products that launch, grow, and make a difference.",
       storyP2:
         "We are two developers from Uruguay who became obsessed with the intersection of great design, clean code, and AI. Every project we take on becomes a canvas for what thoughtful software engineering can achieve.",
       storyP3: "From Montevideo to your inbox — we build what others only plan.",
@@ -181,7 +181,7 @@ export const translations = {
       storyEyebrow: 'Quiénes somos',
       storyTitle: 'Un estudio que entrega.',
       storyP1:
-        'Oriental Labs comenzó con una idea simple: construir cosas reales que la gente use. No prototipos que quedan en un cajón, sino productos que se lanzan, crecen y marcan la diferencia.',
+        'Ceibo Labs comenzó con una idea simple: construir cosas reales que la gente use. No prototipos que quedan en un cajón, sino productos que se lanzan, crecen y marcan la diferencia.',
       storyP2:
         'Somos dos desarrolladores de Uruguay que nos obsesionamos con la intersección del gran diseño, el código limpio y la AI. Cada proyecto que tomamos es un lienzo para lo que la ingeniería de software reflexiva puede lograr.',
       storyP3: 'Desde Montevideo hasta tu bandeja de entrada — construimos lo que otros solo planean.',

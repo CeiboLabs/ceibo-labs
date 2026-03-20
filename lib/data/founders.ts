@@ -29,8 +29,8 @@ export const founders: Founder[] = [
     location: 'Montevideo, Uruguay',
     avatar: '/images/founders/bruno-jorba.webp',
     bio: {
-      en: 'Bruno drives the vision behind Oriental Labs and focuses on turning ideas into real products. He is passionate about building simple, useful, and well-crafted digital solutions, paying close attention to both product and experience. He constantly explores new ideas, technologies, and better ways to improve what already exists.',
-      es: 'Bruno impulsa la visión detrás de Oriental Labs y se enfoca en transformar ideas en productos reales. Le interesa construir soluciones digitales simples, útiles y bien pensadas, cuidando cada detalle del producto y la experiencia. Constantemente explora nuevas ideas, tecnologías y formas de mejorar lo que ya existe.',
+      en: 'Bruno drives the vision behind Ceibo Labs and focuses on turning ideas into real products. He is passionate about building simple, useful, and well-crafted digital solutions, paying close attention to both product and experience. He constantly explores new ideas, technologies, and better ways to improve what already exists.',
+      es: 'Bruno impulsa la visión detrás de Ceibo Labs y se enfoca en transformar ideas en productos reales. Le interesa construir soluciones digitales simples, útiles y bien pensadas, cuidando cada detalle del producto y la experiencia. Constantemente explora nuevas ideas, tecnologías y formas de mejorar lo que ya existe.',
     },
     skills: [],
     linkedin: 'https://www.linkedin.com/in/bruno-jorba-cabrera-a93760173/',
@@ -43,8 +43,8 @@ export const founders: Founder[] = [
     location: 'Montevideo, Uruguay',
     avatar: '/images/founders/emiliano-rodriguez.webp',
     bio: {
-      en: 'Emiliano leads the architecture and technical development of projects at Oriental Labs. He focuses on designing solid, scalable, and well-structured systems, ensuring that every product runs efficiently and reliably. He enjoys solving complex problems, optimizing processes, and turning ideas into well-engineered technological solutions.',
-      es: 'Emiliano lidera la arquitectura y el desarrollo técnico de los proyectos en Oriental Labs. Se enfoca en diseñar sistemas sólidos, escalables y bien estructurados, asegurando que cada producto funcione de forma eficiente y confiable. Le apasiona resolver problemas complejos, optimizar procesos y convertir ideas en soluciones tecnológicas bien construidas.',
+      en: 'Emiliano leads the architecture and technical development of projects at Ceibo Labs. He focuses on designing solid, scalable, and well-structured systems, ensuring that every product runs efficiently and reliably. He enjoys solving complex problems, optimizing processes, and turning ideas into well-engineered technological solutions.',
+      es: 'Emiliano lidera la arquitectura y el desarrollo técnico de los proyectos en Ceibo Labs. Se enfoca en diseñar sistemas sólidos, escalables y bien estructurados, asegurando que cada producto funcione de forma eficiente y confiable. Le apasiona resolver problemas complejos, optimizar procesos y convertir ideas en soluciones tecnológicas bien construidas.',
     },
     skills: [],
     github: 'https://github.com/emirod1955',
@@ -77,12 +77,12 @@ export const timeline: TimelineEvent[] = [
   {
     date: 'Early 2024',
     title: {
-      en: 'Oriental Labs is born',
-      es: 'Nace Oriental Labs',
+      en: 'Ceibo Labs is born',
+      es: 'Nace Ceibo Labs',
     },
     description: {
-      en: 'After multiple successful projects, they made it official. Oriental Labs launched as a Uruguayan software & AI studio.',
-      es: 'Tras múltiples proyectos exitosos, lo hicieron oficial. Oriental Labs se lanzó como un estudio de software y AI uruguayo.',
+      en: 'After multiple successful projects, they made it official. Ceibo Labs launched as a Uruguayan software & AI studio.',
+      es: 'Tras múltiples proyectos exitosos, lo hicieron oficial. Ceibo Labs se lanzó como un estudio de software y AI uruguayo.',
     },
   },
   {

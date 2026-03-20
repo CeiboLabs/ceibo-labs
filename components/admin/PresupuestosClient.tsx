@@ -25,8 +25,8 @@ const DEFAULT_ITEMS: Omit<Item, 'id'>[] = [
 type Moneda = 'USD' | 'UYU' | 'EUR';
 
 const DEFAULT_STATE = {
-  numero: 'OL-2026-004', vigencia: '30 días',
-  cliente: '', proveedor: 'Oriental Labs', provDesc: 'Equipo de desarrollo de software',
+  numero: 'CL-2026-004', vigencia: '30 días',
+  cliente: '', proveedor: 'Ceibo Labs', provDesc: 'Equipo de desarrollo de software',
   descProj: '', tarifa: 20, moneda: 'USD' as Moneda, descuento: 0,
   showFirmas: true, showHoras: true,
   notas: `**Contenido proporcionado por el cliente:** El cliente deberá proporcionar los textos, imágenes, logotipo, datos de contacto y cualquier otro material necesario para completar el sitio web.
@@ -44,7 +44,7 @@ const DEFAULT_STATE = {
   cSoporte: '30 días de soporte gratuito para corrección de errores.',
   cIp: 'El código pasa a ser propiedad del cliente una vez liquidado el pago total.',
   cRespuesta: 'Respuesta a consultas en máximo 24 horas hábiles.',
-  email: 'info@orientalabs.dev',
+  email: 'info@ceibolabs.dev',
 };
 
 function fechaHoy() {
@@ -153,7 +153,7 @@ function buildPrintHTML(data: {
         <div class="firma-line"><div class="firma-name">${esc(cliente || 'Cliente')}</div><div class="firma-role">Cliente — firma y fecha</div></div>
       </div>
       <div class="firma-box"><div class="firma-space"></div>
-        <div class="firma-line"><div class="firma-name">${esc(proveedor || 'Oriental Labs')}</div><div class="firma-role">Proveedor — firma</div></div>
+        <div class="firma-line"><div class="firma-name">${esc(proveedor || 'Ceibo Labs')}</div><div class="firma-role">Proveedor — firma</div></div>
       </div>
     </div>
   </div>` : '';
@@ -234,7 +234,7 @@ function buildPrintHTML(data: {
 
   <div class="doc-header">
     <div class="left">
-      <div class="name">${esc(proveedor || 'Oriental Labs')}</div>
+      <div class="name">${esc(proveedor || 'Ceibo Labs')}</div>
       ${provDesc ? `<div class="sub">${esc(provDesc)}</div>` : ''}
     </div>
     <div class="right">
@@ -251,7 +251,7 @@ function buildPrintHTML(data: {
     </div>
     <div class="parte-box">
       <div class="etiqueta">Proveedor</div>
-      <div class="nombre">${esc(proveedor || 'Oriental Labs')}</div>
+      <div class="nombre">${esc(proveedor || 'Ceibo Labs')}</div>
       ${provDesc ? `<div class="detalle">${esc(provDesc)}</div>` : ''}
     </div>
   </div>
@@ -285,7 +285,7 @@ function buildPrintHTML(data: {
   ${notasHTML}
 
   <div class="doc-footer">
-    ${esc(proveedor || 'Oriental Labs')} · ${esc(email)} · Presupuesto válido por ${esc(vigencia)} a partir de la fecha de emisión
+    ${esc(proveedor || 'Ceibo Labs')} · ${esc(email)} · Presupuesto válido por ${esc(vigencia)} a partir de la fecha de emisión
   </div>
 
 </div>
@@ -401,7 +401,7 @@ export function PresupuestosClient() {
         <div className="bg-slate-900 dark:bg-navy-900 text-white px-5 py-4 flex items-center justify-between">
           <div>
             <p className="text-sm font-bold tracking-wide">Generador de Presupuesto</p>
-            <p className="text-[11px] text-slate-400 mt-0.5">Oriental Labs · Equipo de desarrollo</p>
+            <p className="text-[11px] text-slate-400 mt-0.5">Ceibo Labs · Equipo de desarrollo</p>
           </div>
           <button onClick={resetForm} title="Limpiar formulario"
             className="flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-white transition-colors px-2 py-1 rounded hover:bg-white/10">
@@ -557,7 +557,7 @@ export function PresupuestosClient() {
           {/* Header */}
           <div style={{ background: '#111', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 16px', marginBottom: '4mm' }}>
             <div>
-              <div style={{ fontSize: '20pt', fontWeight: 'bold', color: '#fff', lineHeight: 1.1 }}>{proveedor || 'Oriental Labs'}</div>
+              <div style={{ fontSize: '20pt', fontWeight: 'bold', color: '#fff', lineHeight: 1.1 }}>{proveedor || 'Ceibo Labs'}</div>
               {provDesc && <div style={{ fontSize: '9pt', color: '#bbb', marginTop: 2 }}>{provDesc}</div>}
             </div>
             <div style={{ textAlign: 'right', fontSize: '8.5pt', color: '#bbb', lineHeight: 1.7 }}>
@@ -575,7 +575,7 @@ export function PresupuestosClient() {
             </div>
             <div style={{ border: '0.8px solid #ccc', padding: '4mm 5mm' }}>
               <div style={{ fontSize: '7pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#888', marginBottom: 3 }}>Proveedor</div>
-              <div style={{ fontSize: '11pt', fontWeight: 'bold', color: '#111', lineHeight: 1.2 }}>{proveedor || 'Oriental Labs'}</div>
+              <div style={{ fontSize: '11pt', fontWeight: 'bold', color: '#111', lineHeight: 1.2 }}>{proveedor || 'Ceibo Labs'}</div>
               {provDesc && <div style={{ fontSize: '8pt', color: '#888', marginTop: 1 }}>{provDesc}</div>}
             </div>
           </div>
@@ -664,7 +664,7 @@ export function PresupuestosClient() {
               <div style={{ fontSize: '10pt', fontWeight: 'bold', color: '#111', marginBottom: '2mm', paddingBottom: '1.5mm', borderBottom: '0.5px solid #ccc' }}>Aceptación del Presupuesto</div>
               <p style={{ fontSize: '8pt', color: '#888', marginBottom: '4mm' }}>Al firmar, ambas partes aceptan los servicios, costos y condiciones descritos en este documento.</p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6mm' }}>
-                {[{ name: cliente || 'Cliente', role: 'Cliente — firma y fecha' }, { name: proveedor || 'Oriental Labs', role: 'Proveedor — firma' }].map(({ name, role }) => (
+                {[{ name: cliente || 'Cliente', role: 'Cliente — firma y fecha' }, { name: proveedor || 'Ceibo Labs', role: 'Proveedor — firma' }].map(({ name, role }) => (
                   <div key={role} style={{ textAlign: 'center' }}>
                     <div style={{ height: '10mm' }} />
                     <div style={{ borderTop: '0.8px solid #111', paddingTop: 4 }}>
@@ -687,7 +687,7 @@ export function PresupuestosClient() {
 
           {/* Footer */}
           <div style={{ borderTop: '0.3px solid #ccc', marginTop: '3mm', paddingTop: '2mm', textAlign: 'center', fontSize: '7.5pt', color: '#888' }}>
-            {proveedor || 'Oriental Labs'} · {email} · Presupuesto válido por {vigencia} a partir de la fecha de emisión
+            {proveedor || 'Ceibo Labs'} · {email} · Presupuesto válido por {vigencia} a partir de la fecha de emisión
           </div>
         </div>
       </main>

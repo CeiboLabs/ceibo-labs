@@ -29,7 +29,7 @@ export async function generateMetadata({
 
   const title = (project.title_i18n as Record<string, string> | null)?.es ?? project.title ?? project.slug;
   const shortDesc = (project.short_description_i18n as Record<string, string> | null)?.es ?? project.short_description ?? '';
-  const ogUrl = `/api/og?type=project&title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent('Oriental Labs')}`;
+  const ogUrl = `/api/og?type=project&title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent('Ceibo Labs')}`;
 
   return {
     title,

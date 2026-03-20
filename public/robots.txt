@@ -35,4 +35,4 @@ Disallow: /
 User-agent: PetalBot
 Disallow: /
 
-Sitemap: https://orientalabs.dev/sitemap.xml
+Sitemap: https://ceibolabs.dev/sitemap.xml

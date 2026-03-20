@@ -37,7 +37,7 @@ export function Contact() {
   const { t, locale } = useTranslation();
 
   return (
-    <section id="contact" aria-label="Contact Oriental Labs" className="relative py-24 sm:py-32 bg-navy-950">
+    <section id="contact" aria-label="Contact Ceibo Labs" className="relative py-24 sm:py-32 bg-navy-950">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-px bg-gradient-to-r from-transparent via-electric-400/30 to-transparent" />
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -58,7 +58,7 @@ export function Contact() {
         </AnimatedSection>
 
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-          {/* WhatsApp */}
+          {/* WhatsApp — emerald green */}
           <StaggerItem>
             <motion.a
               href={`${CONTACT.whatsappUrl}?text=${encodeURIComponent(locale === 'es' ? '¡Hola! Vi su página y me gustaría saber más sobre sus servicios.' : 'Hi! I saw your website and would like to know more about your services.')}`}
@@ -67,32 +67,32 @@ export function Contact() {
               whileHover={{ y: -4, scale: 1.01 }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.2 }}
-              className="flex flex-col items-start gap-3 p-6 rounded-2xl bg-[#25D366]/10 border border-[#25D366]/25 hover:border-[#25D366]/50 hover:bg-[#25D366]/15 transition-colors group"
+              className="flex flex-col items-start gap-3 p-6 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 hover:border-emerald-400/70 hover:bg-emerald-500/28 transition-colors group"
             >
-              <div className="w-11 h-11 rounded-xl bg-[#25D366]/15 border border-[#25D366]/25 flex items-center justify-center group-hover:bg-[#25D366]/25 transition-colors">
-                <MessageCircle size={20} className="text-[#25D366]" />
+              <div className="w-11 h-11 rounded-xl bg-emerald-500/30 border border-emerald-400/50 flex items-center justify-center group-hover:bg-emerald-500/45 transition-colors">
+                <MessageCircle size={20} className="text-emerald-300" />
               </div>
               <div>
                 <p className="text-white font-semibold mb-0.5">WhatsApp</p>
                 <p className="text-slate-400 text-sm">{CONTACT.whatsappDisplay}</p>
               </div>
               <div onClick={(e) => e.preventDefault()}>
-                <CopyButton value={CONTACT.whatsappDisplay} activeClass="hover:text-[#25D366] hover:bg-[#25D366]/10 text-[#25D366]" />
+                <CopyButton value={CONTACT.whatsappDisplay} activeClass="hover:text-emerald-300 hover:bg-emerald-500/20 text-emerald-300" />
               </div>
             </motion.a>
           </StaggerItem>
 
-          {/* Email */}
+          {/* Email — sky blue */}
           <StaggerItem>
             <motion.div
               whileHover={{ y: -4, scale: 1.01 }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.2 }}
-              className="flex flex-col items-start gap-3 p-6 rounded-2xl bg-electric-400/8 border border-electric-400/25 hover:border-electric-400/50 hover:bg-electric-400/12 transition-colors group"
+              className="flex flex-col items-start gap-3 p-6 rounded-2xl bg-sky-500/20 border border-sky-400/40 hover:border-sky-400/70 hover:bg-sky-500/28 transition-colors group"
             >
               <Link href={`/${locale}/formulario`} className="flex flex-col gap-3 w-full">
-                <div className="w-11 h-11 rounded-xl bg-electric-400/12 border border-electric-400/25 flex items-center justify-center group-hover:bg-electric-400/20 transition-colors">
-                  <Mail size={20} className="text-electric-400" />
+                <div className="w-11 h-11 rounded-xl bg-sky-500/30 border border-sky-400/50 flex items-center justify-center group-hover:bg-sky-500/45 transition-colors">
+                  <Mail size={20} className="text-sky-300" />
                 </div>
                 <div>
                   <p className="text-white font-semibold mb-0.5">Email</p>
@@ -100,12 +100,12 @@ export function Contact() {
                 </div>
               </Link>
               <div onClick={(e) => e.stopPropagation()}>
-                <CopyButton value={CONTACT.email} activeClass="hover:text-electric-400 hover:bg-electric-400/10 text-electric-400" />
+                <CopyButton value={CONTACT.email} activeClass="hover:text-sky-300 hover:bg-sky-500/20 text-sky-300" />
               </div>
             </motion.div>
           </StaggerItem>
 
-          {/* Instagram */}
+          {/* Instagram — rose/pink */}
           <StaggerItem>
             <motion.a
               href={CONTACT.instagramUrl}
@@ -114,17 +114,17 @@ export function Contact() {
               whileHover={{ y: -4, scale: 1.01 }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.2 }}
-              className="flex flex-col items-start gap-3 p-6 rounded-2xl bg-pink-500/8 border border-pink-500/20 hover:border-pink-500/40 hover:bg-pink-500/12 transition-colors group"
+              className="flex flex-col items-start gap-3 p-6 rounded-2xl bg-rose-500/20 border border-rose-400/40 hover:border-rose-400/70 hover:bg-rose-500/28 transition-colors group"
             >
-              <div className="w-11 h-11 rounded-xl bg-pink-500/12 border border-pink-500/20 flex items-center justify-center group-hover:bg-pink-500/20 transition-colors">
-                <Instagram size={20} className="text-pink-400" />
+              <div className="w-11 h-11 rounded-xl bg-rose-500/30 border border-rose-400/50 flex items-center justify-center group-hover:bg-rose-500/45 transition-colors">
+                <Instagram size={20} className="text-rose-300" />
               </div>
               <div>
                 <p className="text-white font-semibold mb-0.5">Instagram</p>
                 <p className="text-slate-400 text-sm">@{CONTACT.instagramHandle}</p>
               </div>
               <div onClick={(e) => e.preventDefault()}>
-                <CopyButton value={`@${CONTACT.instagramHandle}`} activeClass="hover:text-pink-400 hover:bg-pink-400/10 text-pink-400" />
+                <CopyButton value={`@${CONTACT.instagramHandle}`} activeClass="hover:text-rose-300 hover:bg-rose-500/20 text-rose-300" />
               </div>
             </motion.a>
           </StaggerItem>

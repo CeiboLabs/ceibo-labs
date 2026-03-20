@@ -1,5 +1,5 @@
 -- ─────────────────────────────────────────────────────────────────────
--- Oriental Labs — Admin Settings & Audit Logs Schema
+-- Ceibo Labs — Admin Settings & Audit Logs Schema
 -- Run this in the SQL editor at https://app.supabase.com/project/_/sql
 -- ─────────────────────────────────────────────────────────────────────
 

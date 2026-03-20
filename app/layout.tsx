@@ -37,10 +37,10 @@ export const metadata: Metadata = {
     'Next.js',
     'MVP development',
     'software agency',
-    'Oriental Labs',
+    'Ceibo Labs',
   ],
   authors: [{ name: 'Bruno Jorba' }, { name: 'Emiliano Rodriguez' }],
-  creator: 'Oriental Labs',
+  creator: 'Ceibo Labs',
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? SITE.url
   ),
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: `${SITE.name} — ${SITE.tagline}`,
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     title: `${SITE.name} — ${SITE.tagline}`,
     description: SITE.description,
     creator: SITE.twitterHandle,
-    images: ['/og-image.jpg'],
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
@@ -94,7 +94,7 @@ const websiteJsonLd = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'Oriental Labs',
+  name: 'Ceibo Labs',
   url: SITE.url,
   description: SITE.description,
   logo: `${SITE.url}/api/og`,
@@ -120,8 +120,8 @@ const jsonLd = {
     },
   ],
   sameAs: [
-    'https://instagram.com/orientallabs',
-    'https://twitter.com/orientallabs',
+    'https://instagram.com/ceibolabs.uy',
+    'https://twitter.com/ceibolabs',
   ],
   contactPoint: {
     '@type': 'ContactPoint',

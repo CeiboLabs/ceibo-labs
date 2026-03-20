@@ -5,8 +5,8 @@ import { MaintenanceBanner } from '@/components/admin/MaintenanceBanner';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Admin — Oriental Labs',
-    template: '%s — Admin | Oriental Labs',
+    default: 'Admin — Ceibo Labs',
+    template: '%s — Admin | Ceibo Labs',
   },
   robots: { index: false, follow: false },
 };
@@ -17,7 +17,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     cookies(),
   ]);
 
-  const isAdmin = cookieStore.get('ol_admin')?.value === '1';
+  const isAdmin = cookieStore.get('cl_admin')?.value === '1';
   const showWarning = settings.maintenance_enabled && isAdmin;
 
   return (

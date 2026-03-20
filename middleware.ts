@@ -86,7 +86,7 @@ export async function middleware(request: NextRequest) {
 
   // Path already has a valid locale prefix — proceed to maintenance check
   const locale = localeInPath;
-  const adminCookie = request.cookies.get('ol_admin')?.value;
+  const adminCookie = request.cookies.get('cl_admin')?.value;
 
   // ── 4. Maintenance mode ────────────────────────────────────────────────────
   try {
@@ -120,6 +120,6 @@ export const config = {
     /*
      * Match all paths except Next.js internals and static files.
      */
-    '/((?!_next/static|_next/image|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js)$).*)',
+    '/((?!_next/static|_next/image|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js|webmanifest|txt|xml)$).*)',
   ],
 };

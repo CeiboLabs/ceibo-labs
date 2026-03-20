@@ -452,7 +452,7 @@ export function ProjectEditor({ initial }: Props) {
             </label>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`/api/og?type=project&title=${encodeURIComponent(langTab === 'es' ? form.title : (form.title_en || form.title))}&subtitle=${encodeURIComponent('Oriental Labs')}`}
+              src={`/api/og?type=project&title=${encodeURIComponent(langTab === 'es' ? form.title : (form.title_en || form.title))}&subtitle=${encodeURIComponent('Ceibo Labs')}`}
               alt="OG preview"
               className="w-full rounded-xl border border-navy-600/50"
               style={{ aspectRatio: '1200/630' }}

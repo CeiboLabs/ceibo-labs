@@ -39,7 +39,7 @@ export function About() {
   const { locale, t } = useTranslation();
 
   return (
-    <section id="about" aria-label="About Oriental Labs" className="relative py-24 sm:py-32 bg-navy-950">
+    <section id="about" aria-label="About Ceibo Labs" className="relative py-24 sm:py-32 bg-navy-950">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-px bg-gradient-to-r from-transparent via-electric-400/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
@@ -79,12 +79,12 @@ export function About() {
                 >
                   {/* Banner */}
                   <div className="relative h-24 flex-shrink-0 bg-gradient-to-br from-slate-100 via-slate-200/80 to-slate-100 dark:from-navy-900 dark:via-navy-800/80 dark:to-navy-900">
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_130%,rgba(56,189,248,0.12),transparent_60%)]" />
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_130%,rgba(126,217,182,0.12),transparent_60%)]" />
                     <div
                       className="absolute inset-0"
                       style={{
                         backgroundImage:
-                          'linear-gradient(rgba(56,189,248,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.07) 1px, transparent 1px)',
+                          'linear-gradient(rgba(126,217,182,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(126,217,182,0.07) 1px, transparent 1px)',
                         backgroundSize: '20px 20px',
                       }}
                     />

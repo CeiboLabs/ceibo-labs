@@ -71,7 +71,7 @@ export function Navbar() {
             onClick={(e) => {
               if (isHomepage) { e.preventDefault(); handleNavClick('#hero'); }
             }}
-            aria-label="Oriental Labs — go to homepage"
+            aria-label="Ceibo Labs — go to homepage"
             className="flex-shrink-0"
           >
             <Logo />

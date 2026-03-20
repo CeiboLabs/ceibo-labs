@@ -1,6 +1,6 @@
-# Oriental Labs — Website
+# Ceibo Labs — Website
 
-Marketing and studio website for [Oriental Labs](https://orientalabs.dev) — a Uruguayan software & AI studio.
+Marketing and studio website for [Ceibo Labs](https://ceibolabs.dev) — a Uruguayan software & AI studio.
 
 ## Stack
 
@@ -20,4 +20,4 @@ Marketing and studio website for [Oriental Labs](https://orientalabs.dev) — a 
 
 ---
 
-Oriental Labs © 2026 — Private
+Ceibo Labs © 2026 — Private

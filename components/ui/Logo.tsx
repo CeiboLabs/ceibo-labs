@@ -11,7 +11,7 @@ export function Logo({ className, iconOnly = false }: LogoProps) {
     <div className={cn('flex items-center gap-1', className)}>
       <Image
         src="/images/logo.webp"
-        alt="Oriental Labs logo"
+        alt="Ceibo Labs logo"
         width={40}
         height={40}
         className="object-contain"
@@ -19,8 +19,8 @@ export function Logo({ className, iconOnly = false }: LogoProps) {
       />
       {!iconOnly && (
         <span className="text-xl font-bold tracking-tight text-white">
-          Oriental{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-400 to-cyan-400">
+          Ceibo{' '}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-400 to-electric-300">
             Labs
           </span>
         </span>

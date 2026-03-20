@@ -17,7 +17,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-gradient-to-r from-electric-400 to-cyan-400 text-navy-950 font-semibold hover:from-electric-300 hover:to-cyan-300 shadow-electric hover:shadow-glow-md transition-all duration-200',
+    'bg-gradient-to-r from-electric-400 to-electric-500 text-navy-950 font-semibold hover:from-electric-300 hover:to-electric-400 shadow-electric hover:shadow-glow-md transition-all duration-200',
   secondary:
     'bg-navy-700 dark:bg-navy-700 text-white border border-navy-600 hover:bg-navy-600 hover:border-electric-400/40 transition-all duration-200',
   outline:
@@ -36,7 +36,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', children, href, target, rel, ...props }, ref) => {
     const classes = cn(
       'inline-flex items-center justify-center font-medium cursor-pointer select-none',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-400 focus-visible:ring-offset-2',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-500 focus-visible:ring-offset-2',
       'disabled:pointer-events-none disabled:opacity-50',
       'active:scale-[0.97] transition-transform duration-100',
       variantClasses[variant],

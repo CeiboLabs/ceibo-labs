@@ -26,9 +26,9 @@ export function LanguageToggle({ className }: LanguageToggleProps) {
       aria-label={`Switch to ${locale === 'en' ? 'Spanish' : 'English'}`}
       className={cn(
         'flex items-center justify-center w-9 h-9 rounded-lg',
-        'bg-navy-800/60 border border-navy-600/50',
-        'text-slate-400 hover:text-electric-400',
-        'hover:border-electric-400/40 hover:bg-navy-700/60',
+        'bg-white dark:bg-navy-800/60 border border-black/10 dark:border-navy-600/50',
+        'text-slate-500 dark:text-slate-400 hover:text-electric-400 dark:hover:text-electric-400',
+        'hover:border-electric-400/40 hover:bg-slate-100 dark:hover:bg-navy-700/60',
         'transition-all duration-200 text-xs font-semibold tracking-wide',
         className
       )}

@@ -37,12 +37,12 @@ export function Hero({ takingClients = true }: Props) {
           className="absolute inset-0 opacity-30"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(56,209,248,0.12) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(126,217,182,0.12) 1px, transparent 1px)',
             backgroundSize: '30px 30px',
           }}
         />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-radial from-electric-500/10 via-electric-400/5 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-0 w-96 h-96 bg-gradient-radial from-cyan-500/8 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-0 w-96 h-96 bg-gradient-radial from-electric-500/8 to-transparent rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 grid lg:grid-cols-2 gap-12 items-center">
@@ -63,8 +63,8 @@ export function Hero({ takingClients = true }: Props) {
 
           <div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
-              <span className="text-white block">Oriental</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-400 via-cyan-400 to-electric-300 block">
+              <span className="text-white block">Ceibo</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-400 via-electric-500 to-electric-300 block">
                 Labs
               </span>
             </h1>
@@ -130,7 +130,7 @@ export function Hero({ takingClients = true }: Props) {
                 <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
                 <div className="w-3 h-3 rounded-full bg-green-500/60" />
                 <div className="flex-1 mx-4 text-xs text-center text-slate-500 font-mono">
-                  oriental-labs / build.ts
+                  ceibo-labs / build.ts
                 </div>
                 <Code2 size={14} className="text-slate-600" />
               </div>
@@ -150,7 +150,7 @@ export function Hero({ takingClients = true }: Props) {
                     <span className="text-electric-300">idea</span>{' '}
                     <span className="text-slate-400">=</span>{' '}
                     <span className="text-purple-400">await</span>{' '}
-                    <span className="text-cyan-300">discover</span>
+                    <span className="text-electric-300">discover</span>
                     <span className="text-slate-300">();</span>
                   </div>
                   <div>
@@ -158,17 +158,17 @@ export function Hero({ takingClients = true }: Props) {
                     <span className="text-electric-300">product</span>{' '}
                     <span className="text-slate-400">=</span>{' '}
                     <span className="text-purple-400">await</span>{' '}
-                    <span className="text-cyan-300">ship</span>
+                    <span className="text-electric-300">ship</span>
                     <span className="text-slate-300">(idea);</span>
                   </div>
                   <div>
                     <span className="text-purple-400">await</span>{' '}
-                    <span className="text-cyan-300">iterate</span>
+                    <span className="text-electric-300">iterate</span>
                     <span className="text-slate-300">(product);</span>
                   </div>
                   <div>
                     <span className="text-purple-400">await</span>{' '}
-                    <span className="text-cyan-300">launch</span>
+                    <span className="text-electric-300">launch</span>
                     <span className="text-slate-300">(product);</span>
                   </div>
                 </div>

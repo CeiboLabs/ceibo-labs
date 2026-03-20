@@ -14,7 +14,7 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   return {
-    title: locale === 'es' ? 'Mantenimiento — Oriental Labs' : 'Maintenance — Oriental Labs',
+    title: locale === 'es' ? 'Mantenimiento — Ceibo Labs' : 'Maintenance — Ceibo Labs',
     robots: { index: false, follow: false },
   };
 }
@@ -42,7 +42,7 @@ export default async function MaintenancePage({
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: 'radial-gradient(circle, rgba(56,209,248,0.08) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, rgba(126,217,182,0.08) 1px, transparent 1px)',
             backgroundSize: '30px 30px',
           }}
         />
@@ -72,8 +72,8 @@ export default async function MaintenancePage({
         <a
           href={`${whatsappUrl}?text=${encodeURIComponent(
             locale === 'es'
-              ? 'Hola, intenté visitar Oriental Labs pero está en mantenimiento.'
-              : 'Hi! I tried to visit Oriental Labs but the site is under maintenance.'
+              ? 'Hola, intenté visitar Ceibo Labs pero está en mantenimiento.'
+              : 'Hi! I tried to visit Ceibo Labs but the site is under maintenance.'
           )}`}
           target="_blank"
           rel="noopener noreferrer"

@@ -35,7 +35,7 @@ export function ProjectFilters({ filters, active, onChange }: ProjectFiltersProp
           {active === filter && (
             <motion.span
               layoutId="filter-pill"
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-electric-400 to-cyan-400"
+              className="absolute inset-0 rounded-full bg-gradient-to-r from-electric-400 to-electric-500"
               style={{ zIndex: -1 }}
               transition={{ type: 'spring', bounce: 0.25, duration: 0.4 }}
             />

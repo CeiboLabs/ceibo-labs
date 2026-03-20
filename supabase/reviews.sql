@@ -1,5 +1,5 @@
 -- ─────────────────────────────────────────────────────────────────────
--- Oriental Labs — Reviews / Testimonials
+-- Ceibo Labs — Reviews / Testimonials
 -- Run this in the SQL editor at https://app.supabase.com/project/_/sql
 -- ─────────────────────────────────────────────────────────────────────
 

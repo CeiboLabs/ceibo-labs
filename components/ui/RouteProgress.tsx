@@ -84,7 +84,7 @@ export function RouteProgress() {
         style={{
           width: `${width}%`,
           transitionDuration: width === 100 ? '200ms' : '180ms',
-          boxShadow: '0 0 8px 0 rgba(56, 209, 248, 0.6)',
+          boxShadow: '0 0 8px 0 rgba(126, 217, 182, 0.6)',
         }}
       />
     </div>

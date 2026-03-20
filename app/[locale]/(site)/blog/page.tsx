@@ -16,7 +16,7 @@ export async function generateMetadata({
   const title = isEs ? 'Blog' : 'Blog';
   const description = isEs
     ? 'Ideas, proceso y lecciones de construir software real.'
-    : 'Thoughts, process, and lessons from building real software at Oriental Labs.';
+    : 'Thoughts, process, and lessons from building real software at Ceibo Labs.';
 
   return {
     title,

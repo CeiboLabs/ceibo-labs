@@ -379,22 +379,45 @@ export function PostEditor({ initial }: Props) {
 
       {/* Action buttons */}
       <div className="flex items-center gap-3 mt-8 pt-6 border-t border-navy-700/40 flex-wrap">
-        <button
-          type="button"
-          onClick={() => save('draft')}
-          disabled={saving || !form.title}
-          className="px-5 py-2.5 rounded-xl bg-navy-800/80 border border-navy-600/50 text-slate-300 hover:text-white hover:border-slate-500 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {saving ? 'Saving…' : 'Save draft'}
-        </button>
-        <button
-          type="button"
-          onClick={() => save('published')}
-          disabled={saving || !form.title || !form.content}
-          className="px-5 py-2.5 rounded-xl bg-electric-400 hover:bg-electric-300 text-navy-950 text-sm font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {saving ? 'Publishing…' : 'Publish'}
-        </button>
+        {form.status === 'published' ? (
+          <>
+            <button
+              type="button"
+              onClick={() => save('published')}
+              disabled={saving || !form.title || !form.content}
+              className="px-5 py-2.5 rounded-xl bg-electric-400 hover:bg-electric-300 text-navy-950 text-sm font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {saving ? 'Saving…' : 'Guardar cambios'}
+            </button>
+            <button
+              type="button"
+              onClick={() => save('draft')}
+              disabled={saving || !form.title}
+              className="px-5 py-2.5 rounded-xl bg-navy-800/80 border border-navy-600/50 text-slate-300 hover:text-white hover:border-slate-500 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Volver a borrador
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={() => save('draft')}
+              disabled={saving || !form.title}
+              className="px-5 py-2.5 rounded-xl bg-navy-800/80 border border-navy-600/50 text-slate-300 hover:text-white hover:border-slate-500 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {saving ? 'Saving…' : 'Save draft'}
+            </button>
+            <button
+              type="button"
+              onClick={() => save('published')}
+              disabled={saving || !form.title || !form.content}
+              className="px-5 py-2.5 rounded-xl bg-electric-400 hover:bg-electric-300 text-navy-950 text-sm font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {saving ? 'Publishing…' : 'Publish'}
+            </button>
+          </>
+        )}
         {initial?.id && (
           <button
             type="button"

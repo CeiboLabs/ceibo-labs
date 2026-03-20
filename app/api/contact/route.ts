@@ -22,16 +22,16 @@ export async function POST(req: NextRequest) {
     : '';
 
   const [internalResult, confirmationResult] = await Promise.all([
-    // Email interno a Oriental Labs
+    // Email interno a Ceibo Labs
     resend.emails.send({
-      from: 'Oriental Labs <info@orientalabs.dev>',
-      to: 'info@orientalabs.dev',
+      from: 'Ceibo Labs <info@ceibolabs.dev>',
+      to: 'info@ceibolabs.dev',
       replyTo: email,
       subject: `Nuevo mensaje de ${name}${projectType ? ` — ${projectType}` : ''}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:32px;background:#f9fafb;border-radius:8px;">
           <h2 style="color:#111;margin-bottom:4px;">Nuevo mensaje desde el formulario</h2>
-          <p style="color:#888;font-size:13px;margin-bottom:24px;border-bottom:1px solid #e5e7eb;padding-bottom:16px;">orientalabs.dev</p>
+          <p style="color:#888;font-size:13px;margin-bottom:24px;border-bottom:1px solid #e5e7eb;padding-bottom:16px;">ceibolabs.dev</p>
           <table style="width:100%;border-collapse:collapse;">
             ${row('Nombre', name)}
             ${row('Email', `<a href="mailto:${email}" style="color:#3b82f6;">${email}</a>`)}
@@ -49,13 +49,14 @@ export async function POST(req: NextRequest) {
     }),
     // Email de confirmación al cliente
     resend.emails.send({
-      from: 'Oriental Labs <no-reply@orientalabs.dev>',
+      from: 'Ceibo Labs <no-reply@ceibolabs.dev>',
       to: email,
-      subject: '¡Recibimos tu mensaje!',
+      replyTo: 'info@ceibolabs.dev',
+      subject: '¡Recibimos tu mensaje! / We got your message!',
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:32px;background:#f9fafb;border-radius:8px;">
-          <div style="background:#0f172a;padding:20px 24px;border-radius:8px;margin-bottom:24px;">
-            <span style="font-size:22px;font-weight:bold;color:#fff;">Oriental <span style="color:#38bdf8;">Labs</span></span>
+          <div style="background:#000000;padding:20px 24px;border-radius:8px;margin-bottom:24px;display:flex;align-items:center;gap:10px;">
+            <span style="font-size:22px;font-weight:bold;color:#fff;">Ceibo <span style="color:#7ED9B6;">Labs</span></span>
           </div>
           <h2 style="color:#111;margin-bottom:8px;">Hola, ${name} 👋</h2>
           <p style="color:#444;font-size:15px;line-height:1.6;margin-bottom:16px;">
@@ -63,12 +64,21 @@ export async function POST(req: NextRequest) {
           </p>
           <p style="color:#444;font-size:15px;line-height:1.6;margin-bottom:24px;">
             Si necesitás contactarnos directamente podés escribirnos a
-            <a href="mailto:info@orientalabs.dev" style="color:#38bdf8;">info@orientalabs.dev</a>
-            o por <a href="https://wa.me/59892654214" style="color:#25D366;">WhatsApp</a>.
+            <a href="mailto:info@ceibolabs.dev" style="color:#1A7A50;font-weight:600;">info@ceibolabs.dev</a>
+            o por <a href="https://wa.me/59892654214" style="color:#25D366;font-weight:600;">WhatsApp</a>.
           </p>
+          <div style="background:#f0fdf4;border:1px solid #d1fae5;border-radius:8px;padding:16px;margin-bottom:24px;">
+            <p style="color:#166534;font-size:13px;margin:0;line-height:1.5;">
+              <strong>¿Querés saber más sobre nuestros servicios?</strong><br/>
+              Visitá <a href="https://ceibolabs.dev" style="color:#1A7A50;">ceibolabs.dev</a> para ver nuestros proyectos y servicios.
+            </p>
+          </div>
           <div style="border-top:1px solid #e5e7eb;padding-top:20px;text-align:center;">
-            <p style="color:#aaa;font-size:12px;margin:0;">Oriental Labs · Montevideo, Uruguay</p>
-            <p style="color:#aaa;font-size:11px;margin:4px 0 0;">Este es un email automático, por favor no respondas a este mensaje.</p>
+            <p style="color:#888;font-size:12px;margin:0;">
+              <a href="https://ceibolabs.dev" style="color:#1A7A50;text-decoration:none;font-weight:600;">ceibolabs.dev</a>
+              &nbsp;·&nbsp; Ceibo Labs &nbsp;·&nbsp; Montevideo, Uruguay
+            </p>
+            <p style="color:#bbb;font-size:11px;margin:6px 0 0;">Este mensaje fue enviado automáticamente desde no-reply@ceibolabs.dev. Para responder escribí a <a href="mailto:info@ceibolabs.dev" style="color:#1A7A50;">info@ceibolabs.dev</a>.</p>
           </div>
         </div>
       `,

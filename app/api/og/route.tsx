@@ -9,7 +9,7 @@ let cachedLogoSrc: string | null = null;
 async function getLogoSrc(baseUrl: string): Promise<string> {
   if (cachedLogoSrc) return cachedLogoSrc;
   try {
-    const res = await fetch(`${baseUrl}/images/logo-mark-white.svg`);
+    const res = await fetch(`${baseUrl}/images/logo-mark.svg`);
     if (res.ok) {
       const text = await res.text();
       cachedLogoSrc = `data:image/svg+xml,${encodeURIComponent(text)}`;
@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
 
   const type  = searchParams.get('type')  ?? 'home';
-  const title = searchParams.get('title') ?? (type === 'home' ? 'Oriental Labs' : '');
+  const title = searchParams.get('title') ?? (type === 'home' ? 'Ceibo Labs' : '');
 
   const defaultSubtitle = 'Web, AI & software products built in Uruguay.';
   const subtitle = searchParams.get('subtitle') ?? defaultSubtitle;
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
           display: 'flex',
           flexDirection: 'column',
           position: 'relative',
-          background: '#040D21',
+          background: '#0A1F1A',
           overflow: 'hidden',
           fontFamily: 'system-ui, -apple-system, sans-serif',
         }}
@@ -56,12 +56,12 @@ export async function GET(request: NextRequest) {
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundImage: 'radial-gradient(circle, rgba(99,179,237,0.07) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, rgba(126,217,182,0.07) 1px, transparent 1px)',
             backgroundSize: '40px 40px',
           }}
         />
 
-        {/* Glow — top right (indigo) */}
+        {/* Glow — top right (deep green) */}
         <div
           style={{
             position: 'absolute',
@@ -69,12 +69,12 @@ export async function GET(request: NextRequest) {
             right: '-80px',
             width: '520px',
             height: '520px',
-            background: 'radial-gradient(ellipse, rgba(99,102,241,0.22) 0%, transparent 68%)',
+            background: 'radial-gradient(ellipse, rgba(47,169,127,0.28) 0%, transparent 68%)',
             borderRadius: '50%',
           }}
         />
 
-        {/* Glow — bottom left (cyan) */}
+        {/* Glow — bottom left (mint) */}
         <div
           style={{
             position: 'absolute',
@@ -82,7 +82,7 @@ export async function GET(request: NextRequest) {
             left: '60px',
             width: '640px',
             height: '420px',
-            background: 'radial-gradient(ellipse, rgba(56,189,248,0.16) 0%, transparent 68%)',
+            background: 'radial-gradient(ellipse, rgba(126,217,182,0.16) 0%, transparent 68%)',
             borderRadius: '50%',
           }}
         />
@@ -109,7 +109,7 @@ export async function GET(request: NextRequest) {
                   style={{
                     width: '44px',
                     height: '44px',
-                    background: 'linear-gradient(135deg, #38BDF8, #6366F1)',
+                    background: 'linear-gradient(135deg, #7ED9B6, #2FA97F)',
                     borderRadius: '10px',
                     display: 'flex',
                     alignItems: 'center',
@@ -119,7 +119,7 @@ export async function GET(request: NextRequest) {
                     fontWeight: 800,
                   }}
                 >
-                  O
+                  C
                 </div>
               )}
               <span
@@ -131,7 +131,7 @@ export async function GET(request: NextRequest) {
                   textTransform: 'uppercase',
                 }}
               >
-                Oriental Labs
+                Ceibo Labs
               </span>
             </div>
 
@@ -141,14 +141,14 @@ export async function GET(request: NextRequest) {
                 style={{
                   display: 'flex',
                   padding: '8px 20px',
-                  border: '1px solid rgba(56,189,248,0.35)',
+                  border: '1px solid rgba(126,217,182,0.35)',
                   borderRadius: '999px',
-                  color: '#38BDF8',
+                  color: '#7ED9B6',
                   fontSize: '13px',
                   fontWeight: 700,
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
-                  background: 'rgba(56,189,248,0.07)',
+                  background: 'rgba(126,217,182,0.07)',
                 }}
               >
                 {typeLabel}
@@ -163,7 +163,7 @@ export async function GET(request: NextRequest) {
               style={{
                 width: '52px',
                 height: '4px',
-                background: 'linear-gradient(90deg, #38BDF8, #6366F1)',
+                background: 'linear-gradient(90deg, #7ED9B6, #2FA97F)',
                 borderRadius: '2px',
               }}
             />
@@ -180,7 +180,7 @@ export async function GET(request: NextRequest) {
                 wordBreak: 'break-word',
               }}
             >
-              {title || 'Oriental Labs'}
+              {title || 'Ceibo Labs'}
             </div>
 
             {/* Subtitle */}
@@ -200,7 +200,7 @@ export async function GET(request: NextRequest) {
           {/* ── Footer ── */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
             <span style={{ color: '#334155', fontSize: '14px', letterSpacing: '0.05em' }}>
-              orientalabs.dev
+              ceibolabs.dev
             </span>
           </div>
         </div>
@@ -213,7 +213,7 @@ export async function GET(request: NextRequest) {
             left: 0,
             right: 0,
             height: '3px',
-            background: 'linear-gradient(90deg, transparent 0%, #38BDF8 30%, #6366F1 70%, transparent 100%)',
+            background: 'linear-gradient(90deg, transparent 0%, #7ED9B6 30%, #2FA97F 70%, transparent 100%)',
           }}
         />
       </div>

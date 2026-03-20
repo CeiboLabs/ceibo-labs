@@ -5,7 +5,7 @@ import { CONTACT } from '@/lib/constants';
 
 export const dynamic = 'force-dynamic';
 export const metadata = {
-  title: 'Maintenance — Oriental Labs',
+  title: 'Maintenance — Ceibo Labs',
   robots: { index: false, follow: false },
 };
 
@@ -26,7 +26,7 @@ export default async function MaintenancePage() {
           className="absolute inset-0 opacity-20"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(56,209,248,0.08) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(126,217,182,0.08) 1px, transparent 1px)',
             backgroundSize: '30px 30px',
           }}
         />
@@ -52,7 +52,7 @@ export default async function MaintenancePage() {
         </div>
 
         <a
-          href={`${whatsappUrl}?text=Hi! I tried to visit Oriental Labs but the site is under maintenance.`}
+          href={`${whatsappUrl}?text=Hi! I tried to visit Ceibo Labs but the site is under maintenance.`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-electric-400 hover:bg-electric-300 text-navy-950 font-semibold text-sm transition-colors"
