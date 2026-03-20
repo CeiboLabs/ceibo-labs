@@ -74,16 +74,13 @@ export async function middleware(request: NextRequest) {
   const localeInPath = getLocaleFromPath(pathname);
 
   if (!localeInPath) {
+    // No locale prefix — redirect to localized path
     const locale = detectLocale(request);
-    // Rewrite "/" silently so scrapers/bots see full HTML with OG tags at the root URL
-    if (pathname === '/') {
-      const rewriteUrl = new URL(request.url);
-      rewriteUrl.pathname = `/${locale}`;
-      return NextResponse.rewrite(rewriteUrl);
-    }
-    // All other paths without locale prefix → redirect
     const redirectUrl = new URL(request.url);
-    redirectUrl.pathname = `/${locale}${pathname}`;
+    // Redirect "/" → "/es" or "/en"
+    redirectUrl.pathname = pathname === '/'
+      ? `/${locale}`
+      : `/${locale}${pathname}`;
     return NextResponse.redirect(redirectUrl);
   }
 
