@@ -8,8 +8,8 @@ export const CONTACT = {
   whatsappDisplay: '+598 92 654 214',
 
   // Instagram
-  instagramHandle: 'ceibolabs.uy',
-  instagramUrl: 'https://instagram.com/ceibolabs.uy',
+  instagramHandle: 'ceibolabs',
+  instagramUrl: 'https://instagram.com/ceibolabs',
 
   // Email
   email: 'info@ceibolabs.dev',

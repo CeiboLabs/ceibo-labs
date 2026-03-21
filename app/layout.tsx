@@ -133,7 +133,7 @@ const jsonLd = {
     },
   ],
   sameAs: [
-    'https://instagram.com/ceibolabs.uy',
+    'https://instagram.com/ceibolabs',
     'https://twitter.com/ceibolabs',
   ],
   contactPoint: {
