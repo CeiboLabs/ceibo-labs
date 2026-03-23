@@ -15,7 +15,7 @@ interface CopyButtonProps {
 
 function CopyButton({ value, activeClass = 'hover:text-electric-400 hover:bg-electric-400/10' }: CopyButtonProps) {
   const { copied, copy } = useClipboard();
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <button
