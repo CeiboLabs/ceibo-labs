@@ -76,10 +76,10 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-8 border-t border-navy-700/50">
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-300">
             &copy; {new Date().getFullYear()} Ceibo Labs. {t.footer.copyright}
           </p>
-          <p className="text-xs text-slate-500">{t.footer.builtIn}</p>
+          <p className="text-xs text-slate-300">{t.footer.builtIn}</p>
         </div>
       </div>
     </footer>
