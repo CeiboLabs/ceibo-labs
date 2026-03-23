@@ -34,7 +34,7 @@ function CopyButton({ value, activeClass = 'hover:text-electric-400 hover:bg-ele
 }
 
 export function Contact() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   return (
     <section id="contact" aria-label="Contact Ceibo Labs" className="relative py-24 sm:py-32 bg-navy-950">
