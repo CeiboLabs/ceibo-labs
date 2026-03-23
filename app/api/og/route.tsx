@@ -9,10 +9,10 @@ let cachedLogoSrc: string | null = null;
 async function getLogoSrc(baseUrl: string): Promise<string> {
   if (cachedLogoSrc) return cachedLogoSrc;
   try {
-    const res = await fetch(`${baseUrl}/images/logo-mark.svg`);
+    const res = await fetch(`${baseUrl}/images/logo.webp`);
     if (res.ok) {
-      const text = await res.text();
-      cachedLogoSrc = `data:image/svg+xml,${encodeURIComponent(text)}`;
+      const buf = await res.arrayBuffer();
+      cachedLogoSrc = `data:image/webp;base64,${Buffer.from(buf).toString('base64')}`;
       return cachedLogoSrc;
     }
   } catch {}
