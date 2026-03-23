@@ -102,7 +102,7 @@ export default async function BlogPostPage({
   }
 
   const post = await getPost(slug, isPreview);
-  if (!post) notFound();
+  if (!post) { notFound(); return; }
 
   const related = await getRelatedPosts(post.id, post.tags);
 

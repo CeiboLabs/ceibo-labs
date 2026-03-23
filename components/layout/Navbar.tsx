@@ -11,7 +11,6 @@ import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { Button } from '@/components/ui/Button';
 import { useActiveSection } from '@/lib/hooks/useActiveSection';
 import { useTranslation } from '@/lib/i18n/context';
-import { CONTACT } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
 const SECTION_IDS = ['hero', 'services', 'projects', 'about', 'testimonials', 'contact'];

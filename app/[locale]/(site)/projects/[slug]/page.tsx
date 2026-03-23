@@ -99,7 +99,7 @@ export default async function ProjectPage({
     getPublishedProjectBySlug(slug),
     getPublishedProjects(),
   ]);
-  if (!project) notFound();
+  if (!project) { notFound(); return; }
 
   const title = pickI18n(project.title_i18n, locale as Locale) || project.title || project.slug;
   const breadcrumbJsonLd = {

@@ -18,7 +18,7 @@ export default async function EditPostPage({
     .eq('id', id)
     .single();
 
-  if (!post) notFound();
+  if (!post) { notFound(); return; }
 
   return (
     <>

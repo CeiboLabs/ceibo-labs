@@ -100,7 +100,7 @@ export function AdminDashboard() {
   const actionButtons = (post: Post) => (
     <div className="flex items-center justify-end gap-1">
       <Link
-        href={`/es/${post.status === 'published' ? 'blog' : 'blog'}/${post.slug}${post.status === 'draft' ? '?preview=1' : ''}`}
+        href={`/es/blog/${post.slug}${post.status === 'draft' ? '?preview=1' : ''}`}
         target="_blank"
         className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-navy-700/60 transition-colors"
         title={post.status === 'published' ? 'View live' : 'Preview draft'}

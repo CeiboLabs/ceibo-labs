@@ -13,7 +13,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isEs = locale === 'es';
-  const title = isEs ? 'Blog' : 'Blog';
+  const title = 'Blog';
   const description = isEs
     ? 'Ideas, proceso y lecciones de construir software real.'
     : 'Thoughts, process, and lessons from building real software at Ceibo Labs.';

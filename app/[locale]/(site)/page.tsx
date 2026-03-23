@@ -10,7 +10,6 @@ import { getPublishedReviews } from '@/lib/reviews';
 import { getPublishedProjects } from '@/lib/projects';
 import { getSiteSettings } from '@/lib/settings';
 import { SITE } from '@/lib/constants';
-import type { Locale } from '@/lib/i18n/translations';
 
 export const revalidate = 60;
 
