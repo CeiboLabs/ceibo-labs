@@ -26,6 +26,12 @@
     "resend": "^6.9.3",
     "tailwind-merge": "^2.3.0"
   },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ],
   "devDependencies": {
     "@opennextjs/cloudflare": "^1.17.1",
     "@types/node": "^20",
