@@ -3,7 +3,7 @@
 import { useActionState, useState } from 'react';
 import { Save, ChevronDown, ChevronRight } from 'lucide-react';
 import { saveConfigAction } from '@/app/admin/configuracion/actions';
-import type { CotizacionConfig, CatalogoItem, Condiciones } from '@/types/cotizacion';
+import type { CotizacionConfig, CatalogoItem } from '@/types/cotizacion';
 
 const inputCls =
   'w-full border border-slate-200 dark:border-navy-700/60 rounded-lg bg-white dark:bg-navy-900 text-slate-800 dark:text-slate-100 text-sm px-3 py-2 outline-none focus:border-slate-400 dark:focus:border-electric-400 transition-colors font-[inherit]';
@@ -134,7 +134,7 @@ export function ConfiguracionClient({ config }: Props) {
         {/* ── Default conditions ── */}
         <Section title="Condiciones por defecto">
           <div className="flex flex-col gap-3">
-            {((['pago', 'entrega', 'revisiones', 'soporte', 'ip', 'respuesta'] as const)).map(key => {
+            {(['pago', 'entrega', 'revisiones', 'soporte', 'ip', 'respuesta'] as const).map(key => {
               const labels: Record<typeof key, string> = {
                 pago: 'Forma de pago', entrega: 'Plazo de entrega',
                 revisiones: 'Revisiones incluidas', soporte: 'Soporte post-entrega',

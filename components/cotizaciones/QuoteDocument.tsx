@@ -1,7 +1,6 @@
 'use client';
 
-import type { Cotizacion, WizardAnswers } from '@/types/cotizacion';
-import { FEATURES_BY_TIPO, COMMON_FEATURES } from '@/lib/cotizaciones/features';
+import type { Cotizacion } from '@/types/cotizacion';
 
 interface Props {
   cotizacion: Cotizacion;
@@ -31,84 +30,6 @@ function fmtHrs(h: number) {
   return (h % 1 === 0 ? h.toFixed(0) : h.toString()) + ' h';
 }
 
-// ── Project info derived from wizard answers ──────────────────────────────────
-
-const TIPO_LABELS: Record<string, string> = {
-  landing:       'Landing page',
-  institucional: 'Web institucional',
-  ecommerce:     'Tienda online (e-commerce)',
-  sistema:       'Sistema web / aplicación',
-  mantenimiento: 'Mantenimiento y mejoras',
-};
-
-const SECCIONES_LABELS: Record<string, string> = {
-  '1-3': '1 a 3 secciones',
-  '4-6': '4 a 6 secciones',
-  '7+':  '7 o más secciones',
-};
-
-const PRODUCTOS_LABELS: Record<string, string> = {
-  'menos50': 'Catálogo pequeño (menos de 50 productos)',
-  '50-300':  'Catálogo mediano (50–300 productos)',
-  'mas300':  'Catálogo grande (más de 300 productos)',
-};
-
-const AUTH_LABELS: Record<string, string> = {
-  ninguno: 'Sin autenticación',
-  basico:  'Login básico (usuario y contraseña)',
-  roles:   'Roles y permisos de usuario',
-  oauth:   'Login social (Google / GitHub / OAuth)',
-};
-
-const IDIOMAS_LABELS: Record<string, string> = {
-  'es':    'Español',
-  'es-en': 'Español e inglés (bilingüe)',
-  'multi': 'Multilenguaje (3 o más idiomas)',
-};
-
-const INTEG_LABELS: Record<string, string> = {
-  formularios: 'Formularios de contacto',
-  pagos:       'Pasarela de pago',
-  reservas:    'Sistema de reservas / turnos',
-  mapa:        'Mapa interactivo',
-  otro:        'Integración con API externa',
-};
-
-function getFeatureLabel(id: string, tipo: string): string | null {
-  const all = [...(FEATURES_BY_TIPO[tipo] ?? []), ...COMMON_FEATURES];
-  return all.find(f => f.id === id)?.label ?? null;
-}
-
-function buildScope(a: WizardAnswers): { includes: string[]; excludes: string[] } {
-  const includes: string[] = [];
-  const excludes: string[] = [];
-
-  if (a.incluye_diseno)    includes.push('Diseño UI/UX y propuesta visual');
-  else                     excludes.push('Diseño UI/UX (el cliente provee diseño propio)');
-
-  if (a.incluye_contenido) includes.push('Redacción de contenido y textos');
-  else                     excludes.push('Redacción de contenido (el cliente provee los textos)');
-
-  if (!a.tiene_logo)       includes.push('Diseño de logotipo e identidad básica');
-  else                     excludes.push('Diseño de logo (el cliente tiene identidad visual propia)');
-
-  if (a.incluye_cms)       includes.push('Panel CMS para editar contenido sin programador');
-
-  if (a.necesita_hosting)  includes.push('Configuración de dominio y hosting');
-  else                     excludes.push('Servidor, dominio ni hosting');
-
-  if (a.tiene_sitio_actual) includes.push('Migración del sitio existente');
-
-  if (a.idiomas === 'es-en')  includes.push('Versión bilingüe (español e inglés)');
-  if (a.idiomas === 'multi')  includes.push('Soporte multilenguaje (3 o más idiomas)');
-  if (a.idiomas === 'es')     excludes.push('Versión multilenguaje');
-
-  if (a.integraciones?.length > 0)
-    a.integraciones.forEach(i => includes.push(INTEG_LABELS[i] ?? i));
-
-  return { includes, excludes };
-}
-
 // ── Document (all inline styles for print compatibility) ──────────────────────
 export function QuoteDocument({ cotizacion, empresa }: Props) {
   const {
@@ -132,11 +53,6 @@ export function QuoteDocument({ cotizacion, empresa }: Props) {
     ['Propiedad intelectual', condiciones.ip],
     ['Tiempo de respuesta',   condiciones.respuesta],
   ].filter(([, v]) => v) as [string, string][];
-
-  // Project description data (only if wizard answers exist)
-  const tipoLabel    = answers ? TIPO_LABELS[answers.tipo] : null;
-  const features     = answers?.features ?? [];
-  const scope        = answers ? buildScope(answers) : null;
 
   // Inline style objects
   const s = {

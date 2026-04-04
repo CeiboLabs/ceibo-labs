@@ -25,7 +25,7 @@ export default async function PublicQuotePage({ params }: Props) {
     getCotizacionConfig(),
   ]);
 
-  if (!cotizacion) notFound();
+  if (!cotizacion) return notFound();
 
   const empresa = {
     nombre: config.empresa_nombre,
