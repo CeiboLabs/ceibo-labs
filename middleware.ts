@@ -35,6 +35,7 @@ function isSkippedPath(pathname: string): boolean {
   return (
     pathname.startsWith('/admin') ||
     pathname.startsWith('/api') ||
+    pathname.startsWith('/q/') ||   // public quote view (no locale needed)
     pathname.startsWith('/_next') ||
     pathname === '/robots.txt' ||
     pathname === '/sitemap.xml'

@@ -9,6 +9,14 @@ export function createStaticClient() {
   );
 }
 
+/** Service-role client — bypasses RLS. Server-side only. Never expose to the browser. */
+export function createServiceClient() {
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
+
 export async function createClient() {
   const cookieStore = await cookies();
 
