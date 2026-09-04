@@ -1,6 +1,6 @@
 'use client';
 
-import { MessageCircle, Mail, Instagram, Copy, Check } from 'lucide-react';
+import { Mail, Instagram, Copy, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/ui/AnimatedSection';
@@ -57,31 +57,7 @@ export function Contact() {
           </p>
         </AnimatedSection>
 
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-          {/* WhatsApp — emerald green */}
-          <StaggerItem>
-            <motion.a
-              href={`${CONTACT.whatsappUrl}?text=${encodeURIComponent(locale === 'es' ? '¡Hola! Vi su página y me gustaría saber más sobre sus servicios.' : 'Hi! I saw your website and would like to know more about your services.')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ y: -4, scale: 1.01 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.2 }}
-              className="flex flex-col items-start gap-3 p-6 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 hover:border-emerald-400/70 hover:bg-emerald-500/28 transition-colors group"
-            >
-              <div className="w-11 h-11 rounded-xl bg-emerald-500/30 border border-emerald-400/50 flex items-center justify-center group-hover:bg-emerald-500/45 transition-colors">
-                <MessageCircle size={20} className="text-emerald-300" />
-              </div>
-              <div>
-                <p className="text-white font-semibold mb-0.5">WhatsApp</p>
-                <p className="text-slate-400 text-sm">{CONTACT.whatsappDisplay}</p>
-              </div>
-              <div onClick={(e) => e.preventDefault()}>
-                <CopyButton value={CONTACT.whatsappDisplay} activeClass="hover:text-emerald-300 hover:bg-emerald-500/20 text-emerald-300" />
-              </div>
-            </motion.a>
-          </StaggerItem>
-
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
           {/* Email — sky blue */}
           <StaggerItem>
             <motion.div

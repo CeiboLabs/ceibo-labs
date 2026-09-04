@@ -1,15 +1,14 @@
 'use client';
 
-import { Instagram, Mail, MessageCircle } from 'lucide-react';
+import { Instagram, Mail } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
 import { useTranslation } from '@/lib/i18n/context';
 import { CONTACT, SITE } from '@/lib/constants';
 
 export function Footer() {
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
 
   const SOCIAL_LINKS = [
-    { label: 'WhatsApp', href: `${CONTACT.whatsappUrl}?text=${encodeURIComponent(locale === 'es' ? '¡Hola! Vi su página y me gustaría saber más sobre sus servicios.' : 'Hi! I saw your website and would like to know more about your services.')}`, icon: MessageCircle },
     { label: 'Instagram', href: CONTACT.instagramUrl, icon: Instagram },
     { label: 'Email', href: CONTACT.emailUrl, icon: Mail },
   ];

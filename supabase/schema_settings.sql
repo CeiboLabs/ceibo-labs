@@ -21,7 +21,6 @@ create table if not exists site_settings (
 
   -- Contact links (override lib/constants.ts at runtime)
   contact_email         text,
-  whatsapp_url          text,
   instagram_url         text,
   github_url            text,
   linkedin_url          text,

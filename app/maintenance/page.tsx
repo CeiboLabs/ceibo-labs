@@ -1,4 +1,4 @@
-import { MessageCircle } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
 import { getSiteSettings } from '@/lib/settings';
 import { CONTACT } from '@/lib/constants';
@@ -15,8 +15,6 @@ export default async function MaintenancePage() {
   const message =
     settings.maintenance_message ||
     "We're currently doing some upgrades. We'll be back online shortly.";
-
-  const whatsappUrl = CONTACT.whatsappUrl;
 
   return (
     <div className="min-h-screen bg-navy-950 flex flex-col items-center justify-center px-4 text-center">
@@ -52,13 +50,11 @@ export default async function MaintenancePage() {
         </div>
 
         <a
-          href={`${whatsappUrl}?text=Hi! I tried to visit Ceibo Labs but the site is under maintenance.`}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={`mailto:${CONTACT.email}?subject=${encodeURIComponent('Ceibo Labs under maintenance')}&body=${encodeURIComponent('Hi! I tried to visit Ceibo Labs but the site is under maintenance.')}`}
           className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-electric-400 hover:bg-electric-300 text-navy-950 font-semibold text-sm transition-colors"
         >
-          <MessageCircle size={16} />
-          Contact us on WhatsApp
+          <Mail size={16} />
+          Contact us by email
         </a>
 
       </div>

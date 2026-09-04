@@ -1,4 +1,4 @@
-import { MessageCircle } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
 import { getSiteSettings } from '@/lib/settings';
 import { pickI18n } from '@/lib/i18n-content';
@@ -34,8 +34,6 @@ export default async function MaintenancePage({
       ? 'Estamos haciendo mejoras. Volvemos pronto.'
       : "We're currently doing some upgrades. We'll be back online shortly.");
 
-  const whatsappUrl = CONTACT.whatsappUrl;
-
   return (
     <div className="min-h-screen bg-navy-950 flex flex-col items-center justify-center px-4 text-center">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -70,17 +68,19 @@ export default async function MaintenancePage({
         </div>
 
         <a
-          href={`${whatsappUrl}?text=${encodeURIComponent(
+          href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(
+            locale === 'es'
+              ? 'Ceibo Labs en mantenimiento'
+              : 'Ceibo Labs under maintenance'
+          )}&body=${encodeURIComponent(
             locale === 'es'
               ? 'Hola, intenté visitar Ceibo Labs pero está en mantenimiento.'
               : 'Hi! I tried to visit Ceibo Labs but the site is under maintenance.'
           )}`}
-          target="_blank"
-          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-electric-400 hover:bg-electric-300 text-navy-950 font-semibold text-sm transition-colors"
         >
-          <MessageCircle size={16} />
-          {locale === 'es' ? 'Contáctanos por WhatsApp' : 'Contact us on WhatsApp'}
+          <Mail size={16} />
+          {locale === 'es' ? 'Contáctanos por email' : 'Contact us by email'}
         </a>
       </div>
     </div>

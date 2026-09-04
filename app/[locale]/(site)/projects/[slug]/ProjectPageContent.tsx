@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useCallback } from 'react';
-import { ExternalLink, Github, MessageCircle, ChevronLeft, ChevronRight, Home, X } from 'lucide-react';
+import { ExternalLink, Github, Mail, ChevronLeft, ChevronRight, Home, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { useTranslation } from '@/lib/i18n/context';
@@ -55,7 +55,8 @@ export function ProjectPageContent({ project, allProjects, locale, isPreview }: 
   const prev = idx > 0 ? sorted[idx - 1] : null;
   const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
 
-  const whatsappMsg = encodeURIComponent(`Hola, quería consultar sobre el proyecto "${title}".`);
+  const contactSubject = encodeURIComponent(`Consulta sobre el proyecto "${title}"`);
+  const contactBody = encodeURIComponent(`Hola, quería consultar sobre el proyecto "${title}".`);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-navy-950 via-navy-900/30 to-navy-950 pt-24 pb-20">
@@ -240,8 +241,8 @@ export function ProjectPageContent({ project, allProjects, locale, isPreview }: 
                 {t.projects.viewCode}
               </Button>
             )}
-            <Button variant="ghost" size="md" href={`${CONTACT.whatsappUrl}?text=${whatsappMsg}`} target="_blank" rel="noopener noreferrer">
-              <MessageCircle size={15} />
+            <Button variant="ghost" size="md" href={`mailto:${CONTACT.email}?subject=${contactSubject}&body=${contactBody}`}>
+              <Mail size={15} />
               {t.projects.contactAboutThis}
             </Button>
           </section>

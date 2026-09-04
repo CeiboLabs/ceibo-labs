@@ -1,10 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowDown, MessageCircle, ChevronRight, Code2 } from 'lucide-react';
+import { ArrowDown, Mail, ChevronRight, Code2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { useTranslation } from '@/lib/i18n/context';
-import { CONTACT } from '@/lib/constants';
 
 const floatVariants = {
   initial: { opacity: 0, y: 20 },
@@ -96,12 +95,10 @@ export function Hero({ takingClients = true }: Props) {
             <Button
               variant="outline"
               size="lg"
-              href={`${CONTACT.whatsappUrl}?text=${encodeURIComponent(locale === 'es' ? '¡Hola! Vi su página y me gustaría saber más sobre sus servicios.' : 'Hi! I saw your website and would like to know more about your services.')}`}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/${locale}/formulario`}
             >
-              <MessageCircle size={16} />
-              {takingClients ? t.hero.ctaWhatsapp : t.hero.ctaWaiting}
+              <Mail size={16} />
+              {takingClients ? t.hero.ctaContact : t.hero.ctaWaiting}
             </Button>
           </motion.div>
 

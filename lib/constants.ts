@@ -2,11 +2,6 @@
 // CONTACT DETAILS — Replace these with real values before launch
 // ─────────────────────────────────────────────────────────────
 export const CONTACT = {
-  // WhatsApp: include country code, no spaces or dashes
-  whatsappNumber: '59892654214', // e.g. Uruguay (+598) + local number
-  whatsappUrl: 'https://wa.me/59892654214',
-  whatsappDisplay: '+598 92 654 214',
-
   // Instagram
   instagramHandle: 'ceibolabs',
   instagramUrl: 'https://instagram.com/ceibolabs',

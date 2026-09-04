@@ -17,7 +17,7 @@ export const translations = {
       tagline1: 'Web, AI & software products',
       tagline2: 'built in Uruguay.',
       ctaProjects: 'View Projects',
-      ctaWhatsapp: 'Contact on WhatsApp',
+      ctaContact: 'Contact us',
       ctaWaiting: 'Join the waiting list',
       seeServices: 'See our services',
       codeComment: '// Build something great.',
@@ -97,7 +97,6 @@ export const translations = {
       copyLink: 'Copy link',
       copied: 'Copied!',
       shareOnX: 'Share on X',
-      shareOnWhatsApp: 'WhatsApp',
     },
     form: {
       nameLabel: 'Your name',
@@ -147,7 +146,7 @@ export const translations = {
       tagline1: 'Productos de web, AI y software',
       tagline2: 'construidos en Uruguay.',
       ctaProjects: 'Ver Proyectos',
-      ctaWhatsapp: 'Contactar por WhatsApp',
+      ctaContact: 'Contactanos',
       ctaWaiting: 'Unirse a la lista de espera',
       seeServices: 'Ver nuestros servicios',
       codeComment: '// Construye algo increíble.',
@@ -228,7 +227,6 @@ export const translations = {
       copyLink: 'Copiar enlace',
       copied: '¡Copiado!',
       shareOnX: 'Compartir en X',
-      shareOnWhatsApp: 'WhatsApp',
     },
     form: {
       nameLabel: 'Tu nombre',

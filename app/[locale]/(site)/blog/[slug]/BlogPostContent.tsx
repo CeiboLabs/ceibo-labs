@@ -66,7 +66,6 @@ export function BlogPostContent({
   };
 
   const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(title)}`;
-  const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(title + ' — ' + postUrl)}`;
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-navy-950 pt-24 pb-24">
@@ -156,14 +155,6 @@ export function BlogPostContent({
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-navy-800/60 border border-navy-600/50 text-slate-400 hover:text-white text-sm transition-colors"
             >
               {t.blog.shareOnX}
-            </a>
-            <a
-              href={whatsappShareUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-navy-800/60 border border-navy-600/50 text-slate-400 hover:text-white text-sm transition-colors"
-            >
-              {t.blog.shareOnWhatsApp}
             </a>
           </div>
         </div>

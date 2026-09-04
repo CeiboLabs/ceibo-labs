@@ -64,8 +64,7 @@ export async function POST(req: NextRequest) {
           </p>
           <p style="color:#444;font-size:15px;line-height:1.6;margin-bottom:24px;">
             Si necesitás contactarnos directamente podés escribirnos a
-            <a href="mailto:info@ceibolabs.dev" style="color:#1A7A50;font-weight:600;">info@ceibolabs.dev</a>
-            o por <a href="https://wa.me/59892654214" style="color:#25D366;font-weight:600;">WhatsApp</a>.
+            <a href="mailto:info@ceibolabs.dev" style="color:#1A7A50;font-weight:600;">info@ceibolabs.dev</a>.
           </p>
           <div style="background:#f0fdf4;border:1px solid #d1fae5;border-radius:8px;padding:16px;margin-bottom:24px;">
             <p style="color:#166534;font-size:13px;margin:0;line-height:1.5;">

@@ -42,7 +42,6 @@ export const FEATURES_BY_TIPO: Record<string, FeatureDef[]> = {
 };
 
 export const COMMON_FEATURES: FeatureDef[] = [
-  { id: 'whatsapp_btn', label: 'Botón de WhatsApp flotante', desc: 'Acceso directo a WhatsApp desde cualquier página del sitio', hrs: 1 },
   { id: 'chat_vivo',    label: 'Chat en vivo',               desc: 'Integración con Intercom, Crisp, Tawk.to u otro servicio',  hrs: 5 },
   { id: 'buscador',     label: 'Buscador interno',           desc: 'Búsqueda de contenido dentro del sitio',                   hrs: 4 },
 ];
